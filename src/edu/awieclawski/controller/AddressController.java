@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.awieclawski.base.BaseEntity;
 import edu.awieclawski.dao.EntitiesDao;
+import edu.awieclawski.label.AddressLabels;
 import edu.awieclawski.model.Address;
 import edu.awieclawski.util.EntityUtils;
 
@@ -23,12 +24,12 @@ import edu.awieclawski.util.EntityUtils;
  * @author AWieclawski
  *
  */
-@WebServlet("/upaddress")
+@WebServlet(AddressLabels.servletPath) // ("/upaddress")
 public class AddressController extends HttpServlet {
 	private final static Logger LOGGER = Logger.getLogger(AddressController.class.getName());
 	private static final long serialVersionUID = 873432123456789983L;
 	private EntitiesDao entityDao;
-	private BaseEntity entity = getEntity();
+	private BaseEntity entity = new Address();
 	private Map<String, Object> entityMap;
 	private Map<String, String> labelsMap;
 
@@ -61,6 +62,7 @@ public class AddressController extends HttpServlet {
 		}
 		entity = EntityUtils.getEntityFromMap(entityMap, entity);
 		entityDao.saveAddress(entity);
+		LOGGER.log(Level.INFO, "Saved entity: " + entity.toString());
 
 		// TODO error check logic and
 		// req.getRequestDispatcher("/upaddress")
@@ -72,17 +74,6 @@ public class AddressController extends HttpServlet {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("confirmview.jsp");
 		dispatcher.forward(request, response);
-	}
-
-	private Address getEntity() {
-		if (entity == null)
-			return new Address();
-		try {
-			return (Address) entity;
-		} catch (ClassCastException e) {
-			LOGGER.log(Level.SEVERE, entity + " ClassCastException : " + e.getMessage());
-		}
-		return null;
 	}
 
 }

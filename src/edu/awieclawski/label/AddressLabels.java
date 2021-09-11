@@ -16,13 +16,15 @@ public interface AddressLabels {
 
 	// Address marks
 
-	public final int entityTypeId = 1;
+	public static final int entityTypeId = 1;
 
-	public final String entityTypeMark = "ADR";
+	public static final String entityTypeMark = "ADR";
 
-	public final String entityHeaderName = "Address";
+	public static final String entityHeaderName = "Address";
 
-	public final String entityLink = "upaddress";
+	public static final String entityLink = "upaddress";
+
+	public static final String servletPath = "/" + entityLink;
 
 	// Address labels
 
