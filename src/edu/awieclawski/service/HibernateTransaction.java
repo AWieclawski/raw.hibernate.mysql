@@ -23,7 +23,7 @@ public class HibernateTransaction {
 				transaction.rollback();
 			}
 			LOGGER.log(Level.SEVERE, entity + " error in HibernateTransaction " + transaction + "|" + e.getMessage());
-//			e.printStackTrace();
+			e.printStackTrace();
 
 		}
 	}

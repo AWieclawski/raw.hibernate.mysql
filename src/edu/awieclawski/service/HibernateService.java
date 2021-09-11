@@ -36,10 +36,10 @@ public class HibernateService {
 
 			} catch (UnknownServiceException u) {
 				LOGGER.log(Level.SEVERE, entity + " error - UnknownService Exception " + u.getMessage());
-//				u.printStackTrace();
+				u.printStackTrace();
 			} catch (Exception e) {
 				LOGGER.log(Level.SEVERE, entity + " error - SessionFactory Exception " + e.getMessage());
-//				e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		return sessionFactory;
