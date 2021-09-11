@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.awieclawski.model.Address;
+import edu.awieclawski.model.Person;
 
 /**
  * builds list of classes used by servlets
@@ -15,7 +16,7 @@ import edu.awieclawski.model.Address;
 public class EntitiesList {
 
 	public static List<?> get() {
-		return new ArrayList<>(Arrays.asList(Address.class));
+		return new ArrayList<>(Arrays.asList(Address.class, Person.class));
 	}
 
 }

@@ -40,7 +40,7 @@ public interface AddressLabels {
 
 	public final String flatNumberLabel = "Flat number";
 
-	// Address labels
+	// Address label getters
 
 	public String getCountryLabel();
 

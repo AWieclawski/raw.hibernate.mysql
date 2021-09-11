@@ -28,7 +28,7 @@ public class AddressController extends HttpServlet {
 	private final static Logger LOGGER = Logger.getLogger(AddressController.class.getName());
 	private static final long serialVersionUID = 873432123456789983L;
 	private EntitiesDao entityDao;
-	private BaseEntity entity = getAddress();
+	private BaseEntity entity = getEntity();
 	private Map<String, Object> entityMap;
 	private Map<String, String> labelsMap;
 
@@ -74,7 +74,7 @@ public class AddressController extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private Address getAddress() {
+	private Address getEntity() {
 		if (entity == null)
 			return new Address();
 		try {
