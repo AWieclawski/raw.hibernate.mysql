@@ -28,7 +28,7 @@ public interface PersonLabels {
 
 	// Person labels
 
-	public String govermentIdLabel = "Government id";
+	public String govermentNoLabel = "Government id";
 
 	public String firstNameLabel = "Surname";
 
@@ -36,11 +36,11 @@ public interface PersonLabels {
 
 	public String birthDateLabel = "Birth date";
 
-	public String addressLabel = "Address record";
+	public String addressRecordLabel = "Address record";
 
-	// Person label getters
+	// Person label getters - order is important!
 
-	public String getGovermentIdLabel();
+	public String getGovermentNoLabel();
 
 	public String getFirstNameLabel();
 
@@ -48,6 +48,6 @@ public interface PersonLabels {
 
 	public String getBirthDateLabel();
 
-	public String getAddressLabel();
+	public String getAddressRecordLabel();
 
 }

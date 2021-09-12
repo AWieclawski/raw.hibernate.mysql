@@ -44,7 +44,7 @@ public class Person extends BaseEntity implements Serializable, PersonLabels {
 	private long personId;
 
 	@Column(updatable = true, name = "gov_id", nullable = false, length = 10, unique = true)
-	private String govermentId;
+	private String govermentNo;
 
 	@Column(updatable = true, name = "surname", nullable = false, length = 50)
 	private String firstName;
@@ -58,7 +58,7 @@ public class Person extends BaseEntity implements Serializable, PersonLabels {
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "addr_id", nullable = false)
-	private Address address;
+	private Address addressRecord;
 
 	public long getPersonId() {
 		return personId;
@@ -68,12 +68,12 @@ public class Person extends BaseEntity implements Serializable, PersonLabels {
 		this.personId = personId;
 	}
 
-	public String getGovermentId() {
-		return govermentId;
+	public String getGovermentNo() {
+		return govermentNo;
 	}
 
-	public void setGovermentId(String govermentId) {
-		this.govermentId = govermentId;
+	public void setGovermentNo(String govermentId) {
+		this.govermentNo = govermentId;
 	}
 
 	public String getFirstName() {
@@ -101,24 +101,24 @@ public class Person extends BaseEntity implements Serializable, PersonLabels {
 	}
 
 	public Address getAddress() {
-		return address;
+		return addressRecord;
 	}
 
 	public void setAddress(Address address) {
-		this.address = address;
+		this.addressRecord = address;
 	}
 
 	@Override
 	public String toString() {
 		return "Person [pers_id=" + personId + ", first_name=" + firstName + ", last_name=" + lastName
-				+ ", date_of_birth=" + birthDate + ", address=" + address.toString() + "]";
+				+ ", date_of_birth=" + birthDate + ", address=" + addressRecord.toString() + "]";
 	}
 
-	// Label getters
+	// Label getters - order is important!
 
 	@Override
-	public String getGovermentIdLabel() {
-		return govermentIdLabel;
+	public String getGovermentNoLabel() {
+		return govermentNoLabel;
 	}
 
 	@Override
@@ -137,16 +137,16 @@ public class Person extends BaseEntity implements Serializable, PersonLabels {
 	}
 
 	@Override
-	public String getAddressLabel() {
-		return addressLabel;
+	public String getAddressRecordLabel() {
+		return addressRecordLabel;
 	}
+
+	// transient base entity getters
 
 	@Override
 	public int getEntityTypeId() {
 		return entityTypeId;
 	}
-
-	// transient base entity getters
 
 	@Override
 	public String getEntityUploadPath() {

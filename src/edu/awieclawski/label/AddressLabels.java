@@ -26,11 +26,11 @@ public interface AddressLabels {
 
 	public static final String entityListPath = "/addresslist"; // used as display all webservlet parameter
 
-	// Address labels
-
-	public final String countryLabel = "Country";
+	// Address labels - order is important!
 
 	public final String addressNameLabel = "Address name";
+
+	public final String countryLabel = "Country";
 
 	public final String cityLabel = "City";
 

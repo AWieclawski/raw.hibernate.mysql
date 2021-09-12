@@ -52,6 +52,10 @@ public class Address extends BaseEntity implements Serializable, AddressLabels {
 	@Column(updatable = true, name = "addr_name", nullable = true, length = 50)
 	private String addressName;
 
+	@ColumnDefault(value = "'Poland'")
+	@Column(updatable = true, name = "country", nullable = false, length = 50)
+	private String country; // = "Poland";
+
 	@Column(updatable = true, name = "city", nullable = false, length = 50)
 	private String city;
 
@@ -68,23 +72,11 @@ public class Address extends BaseEntity implements Serializable, AddressLabels {
 	@Column(updatable = true, name = "flat_no", nullable = true, length = 6)
 	private String flatNumber;
 
-	@ColumnDefault(value = "'Poland'")
-	@Column(updatable = true, name = "country", nullable = false, length = 50)
-	private String country; // = "Poland";
-
 	// standard constructor
 	public Address() {
 	}
 
 	// getters & setters
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
 	public long getAddressId() {
 		return addressId;
 	}
@@ -99,6 +91,14 @@ public class Address extends BaseEntity implements Serializable, AddressLabels {
 
 	public void setAddressName(String addressName) {
 		this.addressName = addressName;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	public String getCity() {
@@ -148,7 +148,7 @@ public class Address extends BaseEntity implements Serializable, AddressLabels {
 				+ ", flatNumber=" + flatNumber + "]";
 	}
 
-	// Label getters
+	// Label getters - order is important!
 
 	@Override
 	public String getAddressNameLabel() {
