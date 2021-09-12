@@ -33,6 +33,8 @@ public class EntityUtilTests {
 		System.out.println(
 				"entityClassFromString=" + EntitiesList.getAllowedEntityClassByName(post.getClass().getName()));
 		System.out.println("entityFromString=" + EntitiesList.getAllowedEntityByName(post.getClass().getName()));
+		System.out.println("uploadPathMap=" + EntitiesList.getAllowedUploadPathMap().toString());
+		System.out.println("listPathMap=" + EntitiesList.getAllowedListPathMap().toString());
 
 	}
 

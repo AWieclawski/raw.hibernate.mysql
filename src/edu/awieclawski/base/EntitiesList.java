@@ -1,7 +1,9 @@
 package edu.awieclawski.base;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import edu.awieclawski.model.Address;
 import edu.awieclawski.model.Person;
@@ -53,6 +55,22 @@ public class EntitiesList {
 			}
 		}
 		return null;
+	}
+
+	public static Map<String, String> getAllowedUploadPathMap() {
+		Map<String, String> map = new HashMap<>();
+		for (BaseEntity tmpEntity : getEntitiesList()) {
+			map.put(tmpEntity.getEntityHeaderName(), tmpEntity.getEntityUploadPath());
+		}
+		return map;
+	}
+
+	public static Map<String, String> getAllowedListPathMap() {
+		Map<String, String> map = new HashMap<>();
+		for (BaseEntity tmpEntity : getEntitiesList()) {
+			map.put(tmpEntity.getEntityHeaderName(), tmpEntity.getEntityListPath());
+		}
+		return map;
 	}
 
 }
