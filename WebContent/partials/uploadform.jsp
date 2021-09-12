@@ -10,7 +10,7 @@
 
 <div>
 
-	<form class="form-horizontal" action="<%=ctx%>/${link}" method="post">
+	<form class="form-horizontal" action="<%=ctx%>/${action}" method="post">
 
 		<c:forEach var="entry" items="${entityMap}">
 

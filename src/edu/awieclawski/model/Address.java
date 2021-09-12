@@ -148,28 +148,8 @@ public class Address extends BaseEntity implements Serializable, AddressLabels {
 				+ ", flatNumber=" + flatNumber + "]";
 	}
 
-	// transient base entity fields
-	@Override
-	public int getEntityTypeId() {
-		return entityTypeId;
-	}
+	// Label getters
 
-	@Override
-	public String getEntityTypeMark() {
-		return entityTypeMark;
-	}
-
-	@Override
-	public String getEntityHeaderName() {
-		return entityHeaderName;
-	}
-
-	@Override
-	public String getEntityLink() {
-		return entityLink;
-	}
-
-	// Labels
 	@Override
 	public String getAddressNameLabel() {
 		return addressNameLabel;
@@ -203,6 +183,33 @@ public class Address extends BaseEntity implements Serializable, AddressLabels {
 	@Override
 	public String getFlatNumberLabel() {
 		return flatNumberLabel;
+	}
+
+	// transient base entity getters
+
+	@Override
+	public int getEntityTypeId() {
+		return entityTypeId;
+	}
+
+	@Override
+	public String getEntityTypeMark() {
+		return entityTypeMark;
+	}
+
+	@Override
+	public String getEntityHeaderName() {
+		return entityHeaderName;
+	}
+
+	@Override
+	public String getEntityUploadPath() {
+		return entityUploadPath;
+	}
+
+	@Override
+	public String getEntityListPath() {
+		return entityListPath;
 	}
 
 }

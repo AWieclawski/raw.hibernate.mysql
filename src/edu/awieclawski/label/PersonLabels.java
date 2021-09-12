@@ -1,5 +1,17 @@
 package edu.awieclawski.label;
 
+/**
+ * Fields used:
+ * 
+ * Label as jsp presentation
+ * 
+ * UploadPath as upload servlet path
+ * 
+ * Mark as doc indexing element
+ * 
+ * @author AWieclawski
+ *
+ */
 public interface PersonLabels {
 
 	// Person marks
@@ -10,7 +22,9 @@ public interface PersonLabels {
 
 	public final String entityHeaderName = "Person";
 
-	public final String entityLink = "upperson";
+	public final String entityUploadPath = "/upperson"; // used as upload webservlet parameter
+
+	public static final String entityListPath = "/personlist"; // used as display all webservlet parameter
 
 	// Person labels
 

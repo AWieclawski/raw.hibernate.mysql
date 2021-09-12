@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.awieclawski.base.BaseEntity;
 import edu.awieclawski.dao.EntitiesDao;
-import edu.awieclawski.label.AddressLabels;
-import edu.awieclawski.model.Address;
+import edu.awieclawski.label.PersonLabels;
+import edu.awieclawski.model.Person;
 import edu.awieclawski.util.EntityUtils;
 
 /**
@@ -24,16 +24,16 @@ import edu.awieclawski.util.EntityUtils;
  * @author AWieclawski
  *
  */
-@WebServlet(AddressLabels.entityUploadPath) // individual entity path
-public class AddressController extends HttpServlet {
+@WebServlet(PersonLabels.entityUploadPath) // individual entity path
+public class PersonController extends HttpServlet  {
 	private final static Logger LOGGER = Logger.getLogger(AddressController.class.getName());
-	private static final long serialVersionUID = 873432123456789983L;
+	private static final long serialVersionUID = -234321234567899432L;
 	private EntitiesDao entityDao;
 	private Map<String, Object> entityMap;
 	private Map<String, String> labelsMap;
 
 	// controller individual entity initiator
-	private BaseEntity entity = new Address();
+	private BaseEntity entity = new Person();
 
 	public void init() {
 		entityDao = new EntitiesDao();
@@ -77,5 +77,6 @@ public class AddressController extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("confirmview.jsp");
 		dispatcher.forward(request, response);
 	}
+	
 
 }

@@ -5,7 +5,7 @@ package edu.awieclawski.label;
  * 
  * Label as jsp presentation
  * 
- * Link as upload servlet path
+ * UploadPath as upload servlet path
  * 
  * Mark as doc indexing element
  * 
@@ -22,9 +22,9 @@ public interface AddressLabels {
 
 	public static final String entityHeaderName = "Address";
 
-	public static final String entityLink = "upaddress";
+	public static final String entityUploadPath = "/upaddress"; // used as upload webservlet parameter
 
-	public static final String servletPath = "/" + entityLink;
+	public static final String entityListPath = "/addresslist"; // used as display all webservlet parameter
 
 	// Address labels
 

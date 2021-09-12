@@ -146,11 +146,11 @@ public class Person extends BaseEntity implements Serializable, PersonLabels {
 		return entityTypeId;
 	}
 
-	// Mark getters
+	// transient base entity getters
 
 	@Override
-	public String getEntityLink() {
-		return entityLink;
+	public String getEntityUploadPath() {
+		return entityUploadPath;
 	}
 
 	@Override
@@ -161,6 +161,11 @@ public class Person extends BaseEntity implements Serializable, PersonLabels {
 	@Override
 	public String getEntityTypeMark() {
 		return entityTypeMark;
+	}
+
+	@Override
+	public String getEntityListPath() {
+		return entityListPath;
 	}
 
 }

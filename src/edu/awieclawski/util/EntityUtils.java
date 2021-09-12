@@ -152,7 +152,7 @@ public class EntityUtils {
 	@SuppressWarnings("unused")
 	public static String getEntityLinkByBaseEntity(Object obj, List<?> list) {
 		String name = (String) list.stream().filter(c -> ((Class<?>) c).isInstance(obj))
-				.map(c -> (String) ((BaseEntity) ((Class<?>) c).cast(obj)).getEntityLink()).findFirst().orElse(null);
+				.map(c -> (String) ((BaseEntity) ((Class<?>) c).cast(obj)).getEntityUploadPath()).findFirst().orElse(null);
 
 		return name;
 	}
