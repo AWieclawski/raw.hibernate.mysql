@@ -30,9 +30,9 @@ public interface PersonLabels {
 
 	public String govermentIdLabel = "Government id";
 
-	public String firstNameLabel = "First name";
+	public String firstNameLabel = "Surname";
 
-	public String lastNameLabel = "Name label";
+	public String lastNameLabel = "Family Name";
 
 	public String birthDateLabel = "Birth date";
 
