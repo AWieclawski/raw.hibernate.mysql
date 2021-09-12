@@ -54,7 +54,7 @@ public class PersonController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		registerObject(request, response);
+		registerEntity(request, response);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -66,7 +66,7 @@ public class PersonController extends HttpServlet {
 		request.getRequestDispatcher("upform.jsp").forward(request, response);
 	}
 
-	private void registerObject(HttpServletRequest request, HttpServletResponse response)
+	private void registerEntity(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		// iterate parameters get from request
 		for (Map.Entry<String, Object> entry : entityMap.entrySet()) {

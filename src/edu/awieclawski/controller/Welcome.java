@@ -37,7 +37,6 @@ public class Welcome extends HttpServlet {
 		Enumeration<String> attributeNames = session.getAttributeNames();
 		while (attributeNames.hasMoreElements()) {
 			String tmpAttr = attributeNames.nextElement();
-//			if (!tmpAttr.equals(Attributes.CTX_PTH_A.getName()))
 			session.removeAttribute(tmpAttr);
 		}
 
