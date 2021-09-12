@@ -16,106 +16,116 @@ public class EntityUtils {
 
 	public static BaseEntity getEntityFromMap(Map<String, Object> map, BaseEntity entity) {
 
-		Object value = null;
-		Method[] methods = entity.getClass().getMethods();
+		if (entity != null) {
+			Object value = null;
+			Method[] methods = entity.getClass().getMethods();
 
-		for (Method m : methods) {
-			String nameMeth = m.getName();
-			if (nameMeth.startsWith("set") && !nameMeth.contains("Id")) {
-				String field = nameMeth.substring(3);
-				field = firstLetterToLowerCase(field); // if Class Fields are "lower case named"
-				try {
-					value = map.get(field);
-					m.invoke(entity, value);
-				} catch (IllegalAccessException e) {
-					LOGGER.log(Level.SEVERE, "IllegalAccessException: " + e.getMessage());
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					LOGGER.log(Level.SEVERE, "IllegalArgumentException : " + e.getMessage());
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					LOGGER.log(Level.SEVERE, "InvocationTargetException: " + e.getMessage());
-					e.printStackTrace();
+			for (Method m : methods) {
+				String nameMeth = m.getName();
+				if (nameMeth.startsWith("set") && !nameMeth.contains("Id")) {
+					String field = nameMeth.substring(3);
+					field = firstLetterToLowerCase(field); // if Class Fields are "lower case named"
+					try {
+						value = map.get(field);
+
+						// problematic point
+						m.invoke(entity, value);
+					} catch (IllegalAccessException e) {
+						LOGGER.log(Level.SEVERE, "IllegalAccessException for value " + value + ", field=" + field);
+						e.printStackTrace();
+						continue;
+					} catch (IllegalArgumentException e) {
+						LOGGER.log(Level.SEVERE, "IllegalArgumentException for value " + value + ", field=" + field);
+						e.printStackTrace();
+						continue;
+					} catch (InvocationTargetException e) {
+						LOGGER.log(Level.SEVERE, "InvocationTargetException: for value " + value + ", field=" + field);
+						e.printStackTrace();
+						continue;
+					}
+
 				}
-
 			}
-		}
 //		LOGGER.log(Level.WARNING, "entity: " + entity.toString());
-
+		}
 		return entity;
 	}
 
 	public static Map<String, Object> getMapOfFieldsAndValuesFromClass(Object entity) {
 		Map<String, Object> map = new HashMap<>();
-		Object value = null;
-		Method[] methods = entity.getClass().getMethods();
 
-		for (Method m : methods) {
-			String nameMeth = m.getName();
-			if (nameMeth.startsWith("get")) {
-				try {
-					value = (Object) m.invoke(entity);
-				} catch (IllegalAccessException e) {
-					LOGGER.log(Level.SEVERE, "IllegalAccessException: " + e.getMessage());
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					LOGGER.log(Level.SEVERE, "IllegalArgumentException : " + e.getMessage());
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					LOGGER.log(Level.SEVERE, "InvocationTargetException: " + e.getMessage());
-					e.printStackTrace();
+		if (entity != null) {
+			Object value = null;
+			Method[] methods = entity.getClass().getMethods();
+
+			for (Method m : methods) {
+				String nameMeth = m.getName();
+				if (nameMeth.startsWith("get")) {
+					try {
+						value = (Object) m.invoke(entity);
+					} catch (IllegalAccessException e) {
+						LOGGER.log(Level.SEVERE, "IllegalAccessException: " + e.getMessage());
+						e.printStackTrace();
+					} catch (IllegalArgumentException e) {
+						LOGGER.log(Level.SEVERE, "IllegalArgumentException : " + e.getMessage());
+						e.printStackTrace();
+					} catch (InvocationTargetException e) {
+						LOGGER.log(Level.SEVERE, "InvocationTargetException: " + e.getMessage());
+						e.printStackTrace();
+					}
+					// usually 'get' takes 3 first letters
+					String input = nameMeth.substring(3);
+					input = firstLetterToLowerCase(input); // if Class Fields are "lower case named"
+					if (!input.equals("class") && !input.contains("entity") && !input.contains("Label")
+							&& !input.contains("Id"))
+						if (input != null)
+							map.put(input, value);
 				}
-				// usually 'get' takes 3 first letters
-				String input = nameMeth.substring(3);
-				input = firstLetterToLowerCase(input); // if Class Fields are "lower case named"
-				if (!input.equals("class") && !input.contains("entity") && !input.contains("Label")
-						&& !input.contains("Id"))
-					if (input != null)
-						map.put(input, value);
 			}
-		}
 //		LOGGER.log(Level.WARNING, "MapOfFieldsAndValues: " + map.toString());
-
+		}
 		return map;
 	}
 
 	public static Map<String, String> getMapOfFieldsAndLabelsFromClass(Object entity) {
 		Map<String, String> map = new LinkedHashMap<>();
-		Object value = null;
-		Method[] methods = ReflectUtility.getDeclaredMethodsInOrder(entity.getClass());
 
-		for (Method m : methods) {
-			String nameMeth = m.getName();
-			if (nameMeth.startsWith("get")) {
-				try {
-					value = (Object) m.invoke(entity);
-				} catch (IllegalAccessException e) {
-					LOGGER.log(Level.SEVERE, "IllegalAccessException: " + e.getMessage());
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					LOGGER.log(Level.SEVERE, "IllegalArgumentException : " + e.getMessage());
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					LOGGER.log(Level.SEVERE, "InvocationTargetException: " + e.getMessage());
-					e.printStackTrace();
-				}
-				// usually 'get' takes 3 first letters
-				String input = nameMeth.substring(3);
-				input = firstLetterToLowerCase(input); // if Class Fields are "lower case named"
-				if (!input.equals("class") && !input.contains("entity") && !input.contains("Id"))
-					if (input != null && input.contains("Label")) {
-						input = input.replaceAll("Label", "");
-						try {
-							map.put(input, (String) value);
-						} catch (ClassCastException e) {
-							LOGGER.log(Level.SEVERE, value + " ClassCastException : " + e.getMessage());
-							e.printStackTrace();
-						}
+		if (entity != null) {
+			Object value = null;
+			Method[] methods = ReflectUtility.getDeclaredMethodsInOrder(entity.getClass());
+
+			for (Method m : methods) {
+				String nameMeth = m.getName();
+				if (nameMeth.startsWith("get")) {
+					try {
+						value = (Object) m.invoke(entity);
+					} catch (IllegalAccessException e) {
+						LOGGER.log(Level.SEVERE, "IllegalAccessException: " + e.getMessage());
+						e.printStackTrace();
+					} catch (IllegalArgumentException e) {
+						LOGGER.log(Level.SEVERE, "IllegalArgumentException : " + e.getMessage());
+						e.printStackTrace();
+					} catch (InvocationTargetException e) {
+						LOGGER.log(Level.SEVERE, "InvocationTargetException: " + e.getMessage());
+						e.printStackTrace();
 					}
+					// usually 'get' takes 3 first letters
+					String input = nameMeth.substring(3);
+					input = firstLetterToLowerCase(input); // if Class Fields are "lower case named"
+					if (!input.equals("class") && !input.contains("entity") && !input.contains("Id"))
+						if (input != null && input.contains("Label")) {
+							input = input.replaceAll("Label", "");
+							try {
+								map.put(input, (String) value);
+							} catch (ClassCastException e) {
+								LOGGER.log(Level.SEVERE, value + " ClassCastException : " + e.getMessage());
+								e.printStackTrace();
+							}
+						}
+				}
 			}
-		}
 //		LOGGER.log(Level.WARNING, "MapOfFieldsAndLabels: " + map.toString());
-
+		}
 		return map;
 	}
 

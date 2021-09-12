@@ -9,7 +9,8 @@ import org.hibernate.Transaction;
 public class HibernateTransaction {
 	private final static Logger LOGGER = Logger.getLogger(HibernateTransaction.class.getName());
 
-	public void doSaveEntity(Object entity) {
+	public ErrorService doSaveEntity(Object entity) {
+		ErrorService errorService = new ErrorService();
 		Transaction transaction = null;
 		try (Session session = HibernateService.getSessionFactory(entity).openSession()) {
 			// start a transaction
@@ -20,12 +21,33 @@ public class HibernateTransaction {
 			transaction.commit();
 		} catch (Exception e) {
 			if (transaction != null) {
-				transaction.rollback();
+				errorService = rollTransaction(transaction, entity);
 			}
-			LOGGER.log(Level.SEVERE, entity + " error in HibernateTransaction " + transaction + "|" + e.getMessage());
+			errorService.setCALLOUT_INV_LOG(e.getMessage());
+			LOGGER.log(Level.SEVERE, " Error in HibernateTransaction " + transaction + ", entity="
+					+ (entity != null ? entity.toString() : entity));
 			e.printStackTrace();
 
 		}
+		return errorService;
+	}
+
+	/**
+	 * 
+	 * @param transaction
+	 * @param entity
+	 */
+	private ErrorService rollTransaction(Transaction transaction, Object entity) {
+		ErrorService errorService = new ErrorService();
+		try {
+			transaction.rollback();
+		} catch (Exception e) {
+			errorService.setCALLOUT_INV_LOG(e.getMessage());
+			LOGGER.log(Level.SEVERE, " Error during Transaction  rollback " + transaction + ", entity="
+					+ (entity != null ? entity.toString() : entity));
+			e.printStackTrace();
+		}
+		return errorService;
 	}
 
 }

@@ -49,8 +49,10 @@ public class EntitiesList {
 	}
 
 	public static BaseEntity getAllowedEntityByName(String entityName) {
+		System.out.println("entityName=" + entityName);
 		for (BaseEntity tmpEntity : getEntitiesList()) {
 			if (tmpEntity.getClass().getName().equals(entityName)) {
+				if (tmpEntity != null)
 				return tmpEntity;
 			}
 		}

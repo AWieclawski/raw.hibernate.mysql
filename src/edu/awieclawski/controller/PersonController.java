@@ -74,8 +74,8 @@ public class PersonController extends HttpServlet {
 			entityMap.put(key, request.getParameter(key));
 		}
 		entity = EntityUtils.getEntityFromMap(entityMap, entity);
-		entityDao.saveAddress(entity);
-		LOGGER.log(Level.INFO, "Saved entity: " + entity.toString());
+		if (entityDao.saveAddress(entity).getCALLOUT_INV_LOG() != null)
+			LOGGER.log(Level.SEVERE, "Entity not saved: " + entity.toString());
 
 		// TODO error check logic and
 		// req.getRequestDispatcher("/upaddress")

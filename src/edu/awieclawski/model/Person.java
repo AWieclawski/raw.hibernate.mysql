@@ -104,14 +104,14 @@ public class Person extends BaseEntity implements Serializable, PersonLabels {
 		return addressRecord;
 	}
 
-	public void setAddress(Address address) {
-		this.addressRecord = address;
+	public void setAddress(Address addressRecord) {
+		this.addressRecord = addressRecord;
 	}
 
 	@Override
 	public String toString() {
 		return "Person [pers_id=" + personId + ", first_name=" + firstName + ", last_name=" + lastName
-				+ ", date_of_birth=" + birthDate + ", address=" + addressRecord.toString() + "]";
+				+ ", date_of_birth=" + birthDate + ", address=" + addressRecord + "]";
 	}
 
 	// Label getters - order is important!
