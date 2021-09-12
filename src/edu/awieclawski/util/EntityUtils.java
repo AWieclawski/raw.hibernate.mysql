@@ -106,7 +106,6 @@ public class EntityUtils {
 					if (input != null && input.contains("Label")) {
 						input = input.replaceAll("Label", "");
 						try {
-							LOGGER.log(Level.WARNING, " -- input: " + input);
 							map.put(input, (String) value);
 						} catch (ClassCastException e) {
 							LOGGER.log(Level.SEVERE, value + " ClassCastException : " + e.getMessage());
