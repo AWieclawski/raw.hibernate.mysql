@@ -18,7 +18,8 @@ public class EntityUtilTests {
 		post.setStreetNumber("23D");
 		Address obj = post;
 
-		List<?> list = EntitiesList.getEntitiesList(); // new ArrayList<>(Arrays.asList(Address.class, Person.class));
+		List<?> list = EntitiesList.getEntityClassesList(); // new ArrayList<>(Arrays.asList(Address.class,
+															// Person.class));
 
 		System.out.println("id=" + EntityUtils.getEntityTypeIdIdByBaseEntity(obj, list));
 		System.out.println("mark=" + EntityUtils.getEntityTypeMarkByBaseEntity(obj, list));
@@ -29,6 +30,8 @@ public class EntityUtilTests {
 		System.out.println("labelsmap=" + EntityUtils.getMapOfFieldsAndLabelsFromClass(obj).toString());
 		System.out.println("entityFromMap=" + EntityUtils.getEntityFromMap(labelsMap, post));
 		System.out.println(" - post class name=" + post.getClass().getName());
+		System.out.println(
+				"entityClassFromString=" + EntitiesList.getAllowedEntityClassByName(post.getClass().getName()));
 		System.out.println("entityFromString=" + EntitiesList.getAllowedEntityByName(post.getClass().getName()));
 
 	}

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.awieclawski.base.BaseEntity;
+import edu.awieclawski.base.EntitiesList;
 import edu.awieclawski.dao.EntitiesDao;
 import edu.awieclawski.label.PersonLabels;
 import edu.awieclawski.model.Person;
@@ -25,7 +26,7 @@ import edu.awieclawski.util.EntityUtils;
  *
  */
 @WebServlet(PersonLabels.entityUploadPath) // individual entity path
-public class PersonController extends HttpServlet  {
+public class PersonController extends HttpServlet {
 	private final static Logger LOGGER = Logger.getLogger(AddressController.class.getName());
 	private static final long serialVersionUID = -234321234567899432L;
 	private EntitiesDao entityDao;
@@ -33,12 +34,22 @@ public class PersonController extends HttpServlet  {
 	private Map<String, String> labelsMap;
 
 	// controller individual entity initiator
-	private BaseEntity entity = new Person();
+	private BaseEntity init = new Person();
+	private BaseEntity entity;
 
 	public void init() {
 		entityDao = new EntitiesDao();
-		entityMap = EntityUtils.getMapOfFieldsAndValuesFromClass(entity);
-		labelsMap = EntityUtils.getMapOfFieldsAndLabelsFromClass(entity);
+		entity = EntitiesList.getAllowedEntityByName(init.getClass().getName());
+		if (entity != null) {
+			entityMap = EntityUtils.getMapOfFieldsAndValuesFromClass(entity);
+			labelsMap = EntityUtils.getMapOfFieldsAndLabelsFromClass(entity);
+		} else
+			try {
+				throw new Exception();
+			} catch (Exception e) {
+				LOGGER.log(Level.SEVERE, "Allowed entity initialisation failed: " + entity);
+				e.printStackTrace();
+			}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -77,6 +88,5 @@ public class PersonController extends HttpServlet  {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("confirmview.jsp");
 		dispatcher.forward(request, response);
 	}
-	
 
 }

@@ -21,18 +21,37 @@ public class EntitiesList {
 	 * 
 	 * @return
 	 */
-	public static List<Class<? extends BaseEntity>> getEntitiesList() {
+	public static List<Class<? extends BaseEntity>> getEntityClassesList() {
 		return (Arrays.asList(Address.class, Person.class));
 	}
 
-	public static Class<? extends BaseEntity> getAllowedEntityByName(String entityName) {
-		List<Class<? extends BaseEntity>> list = (List<Class<? extends BaseEntity>>) getEntitiesList();
+	/**
+	 * 
+	 * list of allowed entities
+	 * 
+	 * @return
+	 */
+	public static List<BaseEntity> getEntitiesList() {
+		return (Arrays.asList(new Address(), new Person()));
+	}
+
+	public static Class<? extends BaseEntity> getAllowedEntityClassByName(String entityName) {
+		List<Class<? extends BaseEntity>> list = (List<Class<? extends BaseEntity>>) getEntityClassesList();
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getName().equals(entityName)) {
 				return (Class<? extends BaseEntity>) list.get(i);
 			}
 		}
 
+		return null;
+	}
+
+	public static BaseEntity getAllowedEntityByName(String entityName) {
+		for (BaseEntity tmpEntity : getEntitiesList()) {
+			if (tmpEntity.getClass().getName().equals(entityName)) {
+				return tmpEntity;
+			}
+		}
 		return null;
 	}
 
