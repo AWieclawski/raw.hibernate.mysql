@@ -1,5 +1,7 @@
 package edu.awieclawski.dao;
 
+import java.util.Map;
+
 import edu.awieclawski.base.BaseEntity;
 import edu.awieclawski.service.ErrorService;
 import edu.awieclawski.session.HibernateTransaction;
@@ -12,8 +14,8 @@ import edu.awieclawski.session.HibernateTransaction;
  */
 public class EntitiesDao {
 
-	public ErrorService saveAddress(BaseEntity entity) {
-		return getHibernateTransaction().doSaveEntity(entity);
+	public ErrorService saveAddress(BaseEntity entity, Map<String, Object> recordsMap) {
+		return getHibernateTransaction().doSaveEntity(entity, recordsMap);
 	}
 
 	private HibernateTransaction getHibernateTransaction() {

@@ -31,6 +31,7 @@ public class PersonController extends HttpServlet {
 	private static final long serialVersionUID = -234321234567899432L;
 	private EntitiesDao entityDao;
 	private Map<String, Object> entityMap;
+	private Map<String, Object> recordsMap;
 	private Map<String, String> labelsMap;
 
 	// controller individual entity initiator
@@ -43,6 +44,7 @@ public class PersonController extends HttpServlet {
 		if (entity != null) {
 			entityMap = EntityUtils.getMapOfFieldsAndValuesFromClass(entity);
 			labelsMap = EntityUtils.getMapOfFieldsAndLabelsFromClass(entity);
+			recordsMap = EntityUtils.getMapOfRecordFieldsFromClass(entity);
 		} else
 			try {
 				throw new Exception();
@@ -74,7 +76,7 @@ public class PersonController extends HttpServlet {
 			entityMap.put(key, request.getParameter(key));
 		}
 		entity = EntityUtils.getEntityFromMap(entityMap, entity);
-		if (entityDao.saveAddress(entity).getCALLOUT_INV_LOG() != null)
+		if (entityDao.saveAddress(entity,recordsMap).getCALLOUT_INV_LOG() != null)
 			LOGGER.log(Level.SEVERE, "Entity not saved: " + entity.toString());
 
 		// TODO error check logic and

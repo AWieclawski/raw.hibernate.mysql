@@ -165,7 +165,7 @@ public class EntityUtils {
 					}
 				}
 			}
-//		LOGGER.log(Level.WARNING, "MapOfFieldsAndLabels: " + map.toString());
+//		LOGGER.log(Level.WARNING, "MapOfRecordFieldsFromClass: " + map.toString());
 		}
 		return map;
 	}
