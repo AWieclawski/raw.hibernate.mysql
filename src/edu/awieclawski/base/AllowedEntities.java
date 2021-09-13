@@ -61,6 +61,16 @@ public class AllowedEntities {
 		return null;
 	}
 
+	public static BaseEntity getAllowedEntityContainingName(String entityName) {
+		for (BaseEntity tmpEntity : getEntitiesList()) {
+			if (tmpEntity.getClass().getName().toLowerCase().contains(entityName.toLowerCase())) {
+				if (tmpEntity != null)
+					return tmpEntity;
+			}
+		}
+		return null;
+	}
+
 	// used in menu.jsp
 	public static Map<String, String> getAllowedUploadPathMap() {
 		Map<String, String> map = new HashMap<>();

@@ -27,7 +27,7 @@ public class EntityUtilTests {
 		pers.setFirstName("Andy");
 		pers.setLastName("Rewinsky");
 		pers.setGovermentNo("XX-334-545-765");
-		pers.setAddressRecord(post);
+//		pers.setAddressRecord(post);
 
 		Person obj = pers;
 

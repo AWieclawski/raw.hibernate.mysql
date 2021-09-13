@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import edu.awieclawski.base.AllowedEntities;
 import edu.awieclawski.base.BaseEntity;
 
 public class EntityUtils {
@@ -157,6 +158,8 @@ public class EntityUtils {
 					if (field != null && field.contains("Record") && !field.contains("Label")) {
 						field = field.replaceAll("Record", "");
 						try {
+							if (value == null)
+								value = getValueClassFromKey(field);
 							map.put(field, value);
 						} catch (ClassCastException e) {
 							LOGGER.log(Level.SEVERE, value + " ClassCastException : " + e.getMessage());
@@ -176,6 +179,10 @@ public class EntityUtils {
 			return input.substring(0, 1).toLowerCase() + input.substring(1);
 
 		return null;
+	}
+
+	private static BaseEntity getValueClassFromKey(String key) {
+		return AllowedEntities.getAllowedEntityContainingName(key);
 	}
 
 	@SuppressWarnings("unused")
