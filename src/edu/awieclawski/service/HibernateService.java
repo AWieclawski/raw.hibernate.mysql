@@ -10,7 +10,7 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.UnknownServiceException;
 
 import edu.awieclawski.base.BaseEntity;
-import edu.awieclawski.base.EntitiesList;
+import edu.awieclawski.base.AllowedEntities;
 
 /**
  * 
@@ -27,9 +27,7 @@ public class HibernateService {
 				Configuration configuration = new Configuration();
 
 				configuration.setProperties(getHibernateProperties().getProperties());
-				configuration = getHibernateConfig().getHibernateConfigWithAnnotatedClass(configuration, entity);
-
-				configuration = addAllowedEntityClasses(configuration);
+				configuration = getHibernateConfig().getHibernateConfigWithAnnotatedClass(configuration);
 
 				ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 						.applySettings(configuration.getProperties()).build();
@@ -58,22 +56,6 @@ public class HibernateService {
 
 	private static HibernateProperties getHibernateProperties() {
 		return new HibernateProperties();
-	}
-
-	/**
-	 * Necessary to operate joined Entities
-	 * 
-	 * https://docs.jboss.org/hibernate/annotations/3.5/reference/en/html/ch01.html
-	 * 
-	 * @param configuration
-	 * @return
-	 */
-	private static Configuration addAllowedEntityClasses(Configuration configuration) {
-
-		for (Class<? extends BaseEntity> clazz : EntitiesList.getEntityClassesList())
-			configuration.addAnnotatedClass(clazz);
-
-		return configuration;
 	}
 
 }

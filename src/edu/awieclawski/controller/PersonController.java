@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.awieclawski.base.BaseEntity;
-import edu.awieclawski.base.EntitiesList;
+import edu.awieclawski.base.AllowedEntities;
 import edu.awieclawski.dao.EntitiesDao;
 import edu.awieclawski.label.PersonLabels;
 import edu.awieclawski.model.Person;
@@ -34,12 +34,12 @@ public class PersonController extends HttpServlet {
 	private Map<String, String> labelsMap;
 
 	// controller individual entity initiator
-	private BaseEntity init = new Person();
+	private BaseEntity initEntity = new Person();
 	private BaseEntity entity;
 
 	public void init() {
 		entityDao = new EntitiesDao();
-		entity = EntitiesList.getAllowedEntityByName(init.getClass().getName());
+		entity = AllowedEntities.getAllowedEntityByName(initEntity.getClass().getName());
 		if (entity != null) {
 			entityMap = EntityUtils.getMapOfFieldsAndValuesFromClass(entity);
 			labelsMap = EntityUtils.getMapOfFieldsAndLabelsFromClass(entity);

@@ -1,6 +1,8 @@
 package edu.awieclawski.base;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +18,7 @@ import edu.awieclawski.model.Person;
  * @author AWieclawski
  *
  */
-public class EntitiesList {
+public class AllowedEntities {
 
 	/**
 	 * list of allowed classes
@@ -24,7 +26,10 @@ public class EntitiesList {
 	 * @return
 	 */
 	public static List<Class<? extends BaseEntity>> getEntityClassesList() {
-		return (Arrays.asList(Address.class, Person.class));
+		List<Class<? extends BaseEntity>> list = new ArrayList<>();
+		for (BaseEntity tmpEntity : getEntitiesList())
+			list.add(tmpEntity.getClass());
+		return list;
 	}
 
 	/**
@@ -49,16 +54,17 @@ public class EntitiesList {
 	}
 
 	public static BaseEntity getAllowedEntityByName(String entityName) {
-		System.out.println("entityName=" + entityName);
+//		System.out.println("entityName=" + entityName);
 		for (BaseEntity tmpEntity : getEntitiesList()) {
 			if (tmpEntity.getClass().getName().equals(entityName)) {
 				if (tmpEntity != null)
-				return tmpEntity;
+					return tmpEntity;
 			}
 		}
 		return null;
 	}
 
+	// used in menu.jsp
 	public static Map<String, String> getAllowedUploadPathMap() {
 		Map<String, String> map = new HashMap<>();
 		for (BaseEntity tmpEntity : getEntitiesList()) {

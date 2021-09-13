@@ -3,7 +3,7 @@ package edu.awieclawski.util;
 import java.util.List;
 import java.util.Map;
 
-import edu.awieclawski.base.EntitiesList;
+import edu.awieclawski.base.AllowedEntities;
 import edu.awieclawski.dao.EntitiesDao;
 import edu.awieclawski.model.Address;
 import edu.awieclawski.model.Person;
@@ -29,7 +29,7 @@ public class EntityUtilTests {
 
 		Person obj = pers;
 
-		List<?> list = EntitiesList.getEntityClassesList(); // new ArrayList<>(Arrays.asList(Address.class,
+		List<?> list = AllowedEntities.getEntityClassesList(); // new ArrayList<>(Arrays.asList(Address.class,
 															// Person.class));
 
 		System.out.println("id=" + EntityUtils.getEntityTypeIdIdByBaseEntity(obj, list));
@@ -42,12 +42,12 @@ public class EntityUtilTests {
 		System.out.println("entityFromMap=" + EntityUtils.getEntityFromMap(labelsMap, obj));
 
 		System.out.println(" - obj class name=" + obj.getClass().getName());
-		System.out.println("entityClassesList=" + EntitiesList.getEntityClassesList());
+		System.out.println("entityClassesList=" + AllowedEntities.getEntityClassesList());
 		System.out
-				.println("entityClassFromString=" + EntitiesList.getAllowedEntityClassByName(obj.getClass().getName()));
-		System.out.println("entityFromString=" + EntitiesList.getAllowedEntityByName(obj.getClass().getName()));
-		System.out.println("uploadPathMap=" + EntitiesList.getAllowedUploadPathMap().toString());
-		System.out.println("listPathMap=" + EntitiesList.getAllowedListPathMap().toString());
+				.println("entityClassFromString=" + AllowedEntities.getAllowedEntityClassByName(obj.getClass().getName()));
+		System.out.println("entityFromString=" + AllowedEntities.getAllowedEntityByName(obj.getClass().getName()));
+		System.out.println("uploadPathMap=" + AllowedEntities.getAllowedUploadPathMap().toString());
+		System.out.println("listPathMap=" + AllowedEntities.getAllowedListPathMap().toString());
 
 		// save test
 

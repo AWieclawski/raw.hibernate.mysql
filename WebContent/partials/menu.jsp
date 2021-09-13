@@ -2,12 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
-<%@page import="edu.awieclawski.base.EntitiesList"%>
+<%@page import="edu.awieclawski.base.AllowedEntities"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <%
-	Map<String, String> uploadPathMap = EntitiesList.getAllowedUploadPathMap();
+	Map<String, String> uploadPathMap = AllowedEntities.getAllowedUploadPathMap();
 
 	String ctx = request.getContextPath();
 
