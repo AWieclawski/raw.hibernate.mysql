@@ -27,12 +27,12 @@ public class EntityUtilTests {
 		pers.setFirstName("Andy");
 		pers.setLastName("Rewinsky");
 		pers.setGovermentNo("XX-334-545-765");
-		pers.setAddress(post);
+		pers.setAddressRecord(post);
 
 		Person obj = pers;
 
-		List<?> list = AllowedEntities.getEntityClassesList(); // new ArrayList<>(Arrays.asList(Address.class,
-															// Person.class));
+		// new ArrayList<>(Arrays.asList(Address.class, Person.class));
+		List<?> list = AllowedEntities.getEntityClassesList();
 
 		System.out.println("id=" + EntityUtils.getEntityTypeIdIdByBaseEntity(obj, list));
 		System.out.println("mark=" + EntityUtils.getEntityTypeMarkByBaseEntity(obj, list));
@@ -41,22 +41,23 @@ public class EntityUtilTests {
 		Map<String, Object> labelsMap = EntityUtils.getMapOfFieldsAndValuesFromClass(obj);
 		System.out.println("valuesmap=" + labelsMap.toString());
 		System.out.println("labelsmap=" + EntityUtils.getMapOfFieldsAndLabelsFromClass(obj).toString());
-		System.out.println("entityFromMap=" + EntityUtils.getEntityFromMap(labelsMap, obj));
+		System.out.println("entityFromMap=" + EntityUtils.getEntityFromMap(labelsMap, obj).toString());
+		System.out.println("mapOfRecordFieldsFromClass=" + EntityUtils.getMapOfRecordFieldsFromClass(obj).toString());
 
 		System.out.println(" - obj class name=" + obj.getClass().getName());
 		System.out.println("entityClassesList=" + AllowedEntities.getEntityClassesList());
-		System.out
-				.println("entityClassFromString=" + AllowedEntities.getAllowedEntityClassByName(obj.getClass().getName()));
+		System.out.println(
+				"entityClassFromString=" + AllowedEntities.getAllowedEntityClassByName(obj.getClass().getName()));
 		System.out.println("entityFromString=" + AllowedEntities.getAllowedEntityByName(obj.getClass().getName()));
 		System.out.println("uploadPathMap=" + AllowedEntities.getAllowedUploadPathMap().toString());
 		System.out.println("listPathMap=" + AllowedEntities.getAllowedListPathMap().toString());
 
 		// save test
 
-		EntitiesDao entityDao = new EntitiesDao();
-
-		if (entityDao.saveAddress(obj) != null)
-			System.out.println("Entity not saved: " + obj.toString());
+//		EntitiesDao entityDao = new EntitiesDao();
+//
+//		if (entityDao.saveAddress(obj) != null)
+//			System.out.println("Entity not saved: " + obj.toString());
 
 	}
 

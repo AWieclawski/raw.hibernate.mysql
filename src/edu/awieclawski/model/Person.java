@@ -100,11 +100,11 @@ public class Person extends BaseEntity implements Serializable, PersonLabels {
 		this.birthDate = birthDate;
 	}
 
-	public Address getAddress() {
+	public Address getAddressRecord() {
 		return addressRecord;
 	}
 
-	public void setAddress(Address addressRecord) {
+	public void setAddressRecord(Address addressRecord) {
 		this.addressRecord = addressRecord;
 	}
 

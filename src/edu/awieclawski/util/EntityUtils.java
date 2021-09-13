@@ -129,6 +129,47 @@ public class EntityUtils {
 		return map;
 	}
 
+	public static Map<String, Object> getMapOfRecordFieldsFromClass(Object entity) {
+		Map<String, Object> map = new LinkedHashMap<>();
+
+		if (entity != null) {
+			Object value = null;
+			Method[] methods = ReflectUtility.getDeclaredMethodsInOrder(entity.getClass());
+
+			for (Method m : methods) {
+				String nameMeth = m.getName();
+				if (nameMeth.startsWith("get")) {
+					try {
+						value = (Object) m.invoke(entity);
+					} catch (IllegalAccessException e) {
+						LOGGER.log(Level.SEVERE, "IllegalAccessException: " + e.getMessage());
+						e.printStackTrace();
+					} catch (IllegalArgumentException e) {
+						LOGGER.log(Level.SEVERE, "IllegalArgumentException : " + e.getMessage());
+						e.printStackTrace();
+					} catch (InvocationTargetException e) {
+						LOGGER.log(Level.SEVERE, "InvocationTargetException: " + e.getMessage());
+						e.printStackTrace();
+					}
+					// usually 'get' takes 3 first letters
+					String field = nameMeth.substring(3);
+					field = firstLetterToLowerCase(field); // if Class Fields are "lower case named"
+					if (field != null && field.contains("Record") && !field.contains("Label")) {
+						field = field.replaceAll("Record", "");
+						try {
+							map.put(field, value);
+						} catch (ClassCastException e) {
+							LOGGER.log(Level.SEVERE, value + " ClassCastException : " + e.getMessage());
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+//		LOGGER.log(Level.WARNING, "MapOfFieldsAndLabels: " + map.toString());
+		}
+		return map;
+	}
+
 	// usually after 'get' comes Capital letter - it must be lower case
 	private static String firstLetterToLowerCase(String input) {
 		if (StringUtils.notNullNorEmpty(input))
