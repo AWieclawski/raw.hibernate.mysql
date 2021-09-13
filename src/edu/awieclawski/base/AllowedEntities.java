@@ -2,7 +2,6 @@ package edu.awieclawski.base;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,7 @@ import edu.awieclawski.model.Person;
 public class AllowedEntities {
 
 	/**
-	 * list of allowed classes
+	 * list of allowed entity classes
 	 * 
 	 * @return
 	 */
@@ -49,12 +48,10 @@ public class AllowedEntities {
 				return (Class<? extends BaseEntity>) list.get(i);
 			}
 		}
-
 		return null;
 	}
 
 	public static BaseEntity getAllowedEntityByName(String entityName) {
-//		System.out.println("entityName=" + entityName);
 		for (BaseEntity tmpEntity : getEntitiesList()) {
 			if (tmpEntity.getClass().getName().equals(entityName)) {
 				if (tmpEntity != null)

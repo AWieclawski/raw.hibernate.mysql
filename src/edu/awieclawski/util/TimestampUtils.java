@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DateTimeUtils {
-	private final static Logger LOGGER = Logger.getLogger(DateTimeUtils.class.getName());
+public class TimestampUtils {
+	private final static Logger LOGGER = Logger.getLogger(TimestampUtils.class.getName());
 
 	private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 //	private SimpleDateFormat timestampFormatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

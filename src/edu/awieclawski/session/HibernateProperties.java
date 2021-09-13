@@ -1,4 +1,4 @@
-package edu.awieclawski.service;
+package edu.awieclawski.session;
 
 import java.util.Properties;
 

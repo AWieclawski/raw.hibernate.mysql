@@ -1,4 +1,4 @@
-package edu.awieclawski.service;
+package edu.awieclawski.session;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -6,6 +6,13 @@ import java.util.logging.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import edu.awieclawski.service.ErrorService;
+
+/**
+ * 
+ * @author AWieclawski
+ *
+ */
 public class HibernateTransaction {
 	private final static Logger LOGGER = Logger.getLogger(HibernateTransaction.class.getName());
 

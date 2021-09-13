@@ -1,4 +1,4 @@
-package edu.awieclawski.service;
+package edu.awieclawski.session;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -8,9 +8,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.UnknownServiceException;
-
-import edu.awieclawski.base.BaseEntity;
-import edu.awieclawski.base.AllowedEntities;
 
 /**
  * 

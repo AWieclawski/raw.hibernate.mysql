@@ -1,4 +1,4 @@
-package edu.awieclawski.util;
+package edu.awieclawski.test;
 
 import java.util.List;
 import java.util.Map;
@@ -7,6 +7,8 @@ import edu.awieclawski.base.AllowedEntities;
 import edu.awieclawski.dao.EntitiesDao;
 import edu.awieclawski.model.Address;
 import edu.awieclawski.model.Person;
+import edu.awieclawski.util.DateUtils;
+import edu.awieclawski.util.EntityUtils;
 
 public class EntityUtilTests {
 
@@ -20,7 +22,7 @@ public class EntityUtilTests {
 		post.setStreetNumber("23D");
 
 		Person pers = new Person();
-		pers.setBirthDate(DateUtility.parse("1989-09-23"));
+		pers.setBirthDate(DateUtils.parse("1989-09-23"));
 		System.out.println(" -- " + pers.getBirthDate());
 		pers.setFirstName("Andy");
 		pers.setLastName("Rewinsky");

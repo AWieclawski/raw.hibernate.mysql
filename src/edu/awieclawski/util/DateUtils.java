@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DateUtility {
-	private final static Logger LOGGER = Logger.getLogger(DateUtility.class.getName());
+public class DateUtils {
+	private final static Logger LOGGER = Logger.getLogger(DateUtils.class.getName());
 	private static String[] slashPatterns = { "/", "dd/MM/yyyy", "yyyy/MM/dd" };
 	private static String[] dashPatterns = { "-", "dd-MM-yyyy", "yyyy-MM-dd" };
 	private static Date parsedDate;

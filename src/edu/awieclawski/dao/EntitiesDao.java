@@ -2,7 +2,7 @@ package edu.awieclawski.dao;
 
 import edu.awieclawski.base.BaseEntity;
 import edu.awieclawski.service.ErrorService;
-import edu.awieclawski.service.HibernateTransaction;
+import edu.awieclawski.session.HibernateTransaction;
 
 /**
  * Universal DAO for BaseEntity class heirs
