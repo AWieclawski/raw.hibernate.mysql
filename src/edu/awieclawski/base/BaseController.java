@@ -14,6 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import edu.awieclawski.dao.EntitiesDao;
 import edu.awieclawski.util.EntityUtils;
 
+/**
+ * extender of Base upload / save entity controller
+ * 
+ * @author AWieclawski
+ *
+ */
 @SuppressWarnings("serial")
 public abstract class BaseController extends HttpServlet {
 

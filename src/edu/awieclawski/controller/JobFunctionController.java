@@ -15,7 +15,7 @@ import edu.awieclawski.label.JobFunctionLabel;
 import edu.awieclawski.model.JobFunction;
 
 /**
- * simple upload / save entity controller
+ * extender of Base upload / save entity controller
  * 
  * @author AWieclawski
  *

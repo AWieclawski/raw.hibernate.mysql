@@ -15,7 +15,7 @@ import edu.awieclawski.label.CompanyLables;
 import edu.awieclawski.model.Company;
 
 /**
- * simple upload / save entity controller
+ * extender of Base upload / save entity controller
  * 
  * @author AWieclawski
  *

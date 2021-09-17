@@ -15,7 +15,7 @@ import edu.awieclawski.label.AddressLabels;
 import edu.awieclawski.model.Address;
 
 /**
- * simple upload / save entity controller
+ * extender of Base upload / save entity controller
  * 
  * @author AWieclawski
  *

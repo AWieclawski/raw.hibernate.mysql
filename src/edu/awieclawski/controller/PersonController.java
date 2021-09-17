@@ -15,7 +15,7 @@ import edu.awieclawski.label.PersonLabels;
 import edu.awieclawski.model.Person;
 
 /**
- * simple upload / save entity controller
+ * extender of Base upload / save entity controller
  * 
  * @author AWieclawski
  *
