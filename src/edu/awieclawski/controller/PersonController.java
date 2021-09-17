@@ -31,7 +31,7 @@ public class PersonController extends HttpServlet {
 	private static final long serialVersionUID = -234321234567899432L;
 	private EntitiesDao entityDao;
 	private Map<String, Object> entityMap;
-	private Map<String, Object> recordsMap;
+	private Map<String, BaseEntity> recordsMap;
 	private Map<String, String> labelsMap;
 
 	// controller individual entity initiator

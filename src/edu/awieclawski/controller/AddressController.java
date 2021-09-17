@@ -31,7 +31,7 @@ public class AddressController extends HttpServlet {
 	private static final long serialVersionUID = 873432123456789983L;
 	private EntitiesDao entityDao;
 	private Map<String, Object> entityMap;
-	private Map<String, Object> recordsMap;
+	private Map<String, BaseEntity> recordsMap;
 	private Map<String, String> labelsMap;
 
 	// controller individual entity initiator

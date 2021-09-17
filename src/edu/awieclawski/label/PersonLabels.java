@@ -22,7 +22,7 @@ public interface PersonLabels {
 
 	public final String entityHeaderName = "Person";
 
-	public final String entityUploadPath = "/upperson"; // used as upload webservlet parameter
+	public static final String entityUploadPath = "/upperson"; // used as upload webservlet parameter
 
 	public static final String entityListPath = "/personlist"; // used as display all webservlet parameter
 

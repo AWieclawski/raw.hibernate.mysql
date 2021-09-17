@@ -130,8 +130,8 @@ public class EntityUtils {
 		return map;
 	}
 
-	public static Map<String, Object> getMapOfRecordFieldsFromClass(Object entity) {
-		Map<String, Object> map = new LinkedHashMap<>();
+	public static Map<String, BaseEntity> getMapOfRecordFieldsFromClass(BaseEntity entity) {
+		Map<String, BaseEntity> map = new LinkedHashMap<>();
 
 		if (entity != null) {
 			Object value = null;
@@ -161,7 +161,8 @@ public class EntityUtils {
 						try {
 							if (value == null)
 								value = getValueClassFromKey(field);
-							map.put(parentClassName, value);
+//							LOGGER.log(Level.WARNING, " -- field=" + field + ",value=" + value);
+							map.put(field, (BaseEntity) value);
 						} catch (Exception e) {
 							LOGGER.log(Level.SEVERE,
 									parentClassName + ", value=" + value + " ClassCastException : " + e.getMessage());
@@ -170,7 +171,7 @@ public class EntityUtils {
 					}
 				}
 			}
-//		LOGGER.log(Level.WARNING, "MapOfRecordFieldsFromClass: " + map.toString());
+//			LOGGER.log(Level.WARNING, "MapOfRecordFieldsFromClass: " + map.toString());
 		}
 		return map;
 	}

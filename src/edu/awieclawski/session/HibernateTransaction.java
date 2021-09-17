@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import edu.awieclawski.base.BaseEntity;
 import edu.awieclawski.service.ErrorService;
 
 /**
@@ -17,7 +18,7 @@ import edu.awieclawski.service.ErrorService;
 public class HibernateTransaction {
 	private final static Logger LOGGER = Logger.getLogger(HibernateTransaction.class.getName());
 
-	public ErrorService doSaveEntity(Object entity, Map<String, Object> recordsMap) {
+	public ErrorService doSaveEntity(Object entity, Map<String, BaseEntity> recordsMap) {
 		ErrorService errorService = new ErrorService();
 		Transaction transaction = null;
 		try (Session session = HibernateService.getSessionFactory(entity).openSession()) {

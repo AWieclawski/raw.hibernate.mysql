@@ -14,7 +14,7 @@ import edu.awieclawski.session.HibernateTransaction;
  */
 public class EntitiesDao {
 
-	public ErrorService saveAddress(BaseEntity entity, Map<String, Object> recordsMap) {
+	public ErrorService saveAddress(BaseEntity entity, Map<String, BaseEntity> recordsMap) {
 		return getHibernateTransaction().doSaveEntity(entity, recordsMap);
 	}
 
