@@ -136,6 +136,7 @@ public class EntityUtils {
 		if (entity != null) {
 			Object value = null;
 			Method[] methods = ReflectUtility.getDeclaredMethodsInOrder(entity.getClass());
+			String parentClassName = entity.getClass().getTypeName();
 
 			for (Method m : methods) {
 				String nameMeth = m.getName();
@@ -160,9 +161,10 @@ public class EntityUtils {
 						try {
 							if (value == null)
 								value = getValueClassFromKey(field);
-							map.put(field, value);
-						} catch (ClassCastException e) {
-							LOGGER.log(Level.SEVERE, value + " ClassCastException : " + e.getMessage());
+							map.put(parentClassName, value);
+						} catch (Exception e) {
+							LOGGER.log(Level.SEVERE,
+									parentClassName + ", value=" + value + " ClassCastException : " + e.getMessage());
 							e.printStackTrace();
 						}
 					}
