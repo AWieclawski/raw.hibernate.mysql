@@ -4,27 +4,67 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import edu.awieclawski.base.BaseEntity;
 import edu.awieclawski.label.JobContractLabels;
+
+@Entity
+@Table(name = "contracts")
+@NamedQueries({
+
+		@NamedQuery(name = "JobContract.findAll", query = "SELECT j FROM JobContract j"),
+
+		@NamedQuery(name = "JobContract.findById", query = "SELECT j FROM JobContract j WHERE j.contractId = :id"),
+
+})
 
 public class JobContract extends BaseEntity implements Serializable, JobContractLabels {
 
 	private static final long serialVersionUID = -2756167856683541268L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "contr_id")
 	private long contractId;
 
+	@Column(updatable = true, name = "contr_name", nullable = true, length = 50)
 	private String contractName;
 
+	@Column(updatable = true, name = "startdate", nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date contractStarts;
 
+	@Column(updatable = true, name = "enddate", nullable = true)
+	@Temporal(TemporalType.DATE)
 	private Date contractEnds;
 
+	@Column(updatable = true, name = "salary", nullable = false, length = 22)
 	private BigDecimal salary;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "comp_id", nullable = false)
 	private Company companyRecord;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "pers_id", nullable = false)
 	private Person personRecord;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "job_id", nullable = false)
 	private JobFunction jobFunctionRecord;
 
 	// standard no parameters constructor, must be

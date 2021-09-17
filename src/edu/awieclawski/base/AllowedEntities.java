@@ -40,7 +40,7 @@ public class AllowedEntities {
 	 * @return
 	 */
 	public static List<BaseEntity> getEntitiesList() {
-		return (Arrays.asList(new Address(), new Person(),new Company(),new JobContract()));
+		return (Arrays.asList(new Address(), new Person(), new Company(), new JobContract()));
 	}
 
 	public static Class<? extends BaseEntity> getAllowedEntityClassByName(String entityName) {

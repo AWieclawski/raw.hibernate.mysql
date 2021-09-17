@@ -2,17 +2,43 @@ package edu.awieclawski.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
 import edu.awieclawski.base.BaseEntity;
 import edu.awieclawski.label.JobFunctionLabel;
+
+@Entity
+@Table(name = "jobs")
+@NamedQueries({
+
+		@NamedQuery(name = "JobFunction.findById", query = "SELECT j FROM JobFunction j WHERE j.jobId = :id"),
+
+		@NamedQuery(name = "JobFunction.findByName", query = "SELECT j FROM JobFunction j WHERE j.jobName = :name"),
+
+		@NamedQuery(name = "JobFunction.findBySup", query = "SELECT j FROM JobFunction j WHERE j.isSupervisor = :sup"),
+
+})
 
 public class JobFunction extends BaseEntity implements Serializable, JobFunctionLabel {
 
 	private static final long serialVersionUID = 7931934861961047663L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "job_id")
 	private long jobId;
 
+	@Column(updatable = true, name = "name", nullable = false, length = 50)
 	private String jobName;
 
+	@Column(updatable = true, name = "is_sup", nullable = false)
 	private Boolean isSupervisor;
 
 	// default constructor MUST BE

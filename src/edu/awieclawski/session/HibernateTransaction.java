@@ -36,7 +36,6 @@ public class HibernateTransaction {
 			LOGGER.log(Level.SEVERE, " Error in HibernateTransaction " + transaction + ", entity="
 					+ (entity != null ? entity.toString() : entity));
 			e.printStackTrace();
-
 		}
 		return errorService;
 	}

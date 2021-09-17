@@ -2,22 +2,52 @@ package edu.awieclawski.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
 import edu.awieclawski.base.BaseEntity;
 import edu.awieclawski.label.CompanyLables;
+
+@Entity
+@Table(name = "companies")
+@NamedQueries({
+
+		@NamedQuery(name = "Company.findByName", query = "SELECT c FROM Company c WHERE c.companyName = :name"),
+
+		@NamedQuery(name = "Company.findById", query = "SELECT c FROM Company c WHERE c.companyId = :id"),
+
+})
 
 public class Company extends BaseEntity implements Serializable, CompanyLables {
 
 	private static final long serialVersionUID = -5039546866289007641L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "comp_id")
 	private long companyId;
 
+	@Column(updatable = true, name = "tax_id", nullable = false, length = 10, unique = true)
 	private String taxId;
 
+	@Column(updatable = true, name = "comp_name", nullable = false, length = 50)
 	private String companyName;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "addr_id", nullable = false)
 	private Address addressRecord;
 
-	// must be
+	// default constructor MUST BE
 	public Company() {
 	}
 

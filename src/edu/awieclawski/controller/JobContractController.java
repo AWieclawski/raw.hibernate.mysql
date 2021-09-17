@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.awieclawski.base.BaseController;
 import edu.awieclawski.base.BaseEntity;
-import edu.awieclawski.label.PersonLabels;
-import edu.awieclawski.model.Person;
+import edu.awieclawski.label.JobContractLabels;
+import edu.awieclawski.model.JobContract;
 
 /**
  * simple upload / save entity controller
@@ -20,10 +20,10 @@ import edu.awieclawski.model.Person;
  * @author AWieclawski
  *
  */
-@WebServlet(PersonLabels.entityUploadPath) // individual entity path
-public class PersonController extends BaseController {
-	private final static Logger LOGGER = Logger.getLogger(AddressController.class.getName());
-	private static final long serialVersionUID = -234321234567899432L;
+@WebServlet(JobContractLabels.entityUploadPath) // individual entity path
+public class JobContractController extends BaseController {
+	private final static Logger LOGGER = Logger.getLogger(JobContractController.class.getName());
+	private static final long serialVersionUID = 842598365456524835L;
 
 	@Override
 	public void init() {
@@ -49,7 +49,7 @@ public class PersonController extends BaseController {
 
 	@Override
 	public BaseEntity getinitEntity() {
-		return new Person();
+		return new JobContract();
 	}
 
 }
