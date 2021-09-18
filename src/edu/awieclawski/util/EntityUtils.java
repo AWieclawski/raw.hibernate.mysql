@@ -135,7 +135,8 @@ public class EntityUtils {
 
 		if (entity != null) {
 			Object value = null;
-			Method[] methods = ReflectUtility.getDeclaredMethodsInOrder(entity.getClass());
+//			Method[] methods = ReflectUtility.getDeclaredMethodsInOrder(entity.getClass());
+			Method[] methods = entity.getClass().getMethods();
 			String parentClassName = entity.getClass().getTypeName();
 
 			for (Method m : methods) {
