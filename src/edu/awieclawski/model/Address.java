@@ -1,6 +1,8 @@
 package edu.awieclawski.model;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -210,6 +212,26 @@ public class Address extends BaseEntity implements Serializable, AddressLabels {
 	@Override
 	public String getEntityListPath() {
 		return entityListPath;
+	}
+
+	// Label order
+
+	@Override
+	public Map<String, String> getLabelsOrder() {
+		Map<String, String> map = new LinkedHashMap<>() {
+			private static final long serialVersionUID = -8458858973241099586L;
+			// order is important
+			{
+				put("addressName", addressNameLabel);
+				put("country", countryLabel);
+				put("city", cityLabel);
+				put("postalCode", postalCodeLabel);
+				put("streetName", streetNameLabel);
+				put("streetNumber", streetNumberLabel);
+				put("flatNumber", flatNumberLabel);
+			}
+		};
+		return map;
 	}
 
 }

@@ -49,5 +49,4 @@ public interface PersonLabels {
 	public String getBirthDateLabel();
 
 	public String getAddressRecordLabel();
-
 }

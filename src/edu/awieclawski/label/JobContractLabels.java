@@ -28,7 +28,7 @@ public interface JobContractLabels {
 
 	public static final String personRecordLabel = "Person record";
 
-	public static final String jobFunctionRecordLabel = "Job Function Record";
+	public static final String jobFunctionRecordLabel = "Job Function record";
 
 	// Label getters
 

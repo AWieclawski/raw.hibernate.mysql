@@ -15,7 +15,7 @@ import edu.awieclawski.dao.EntitiesDao;
 import edu.awieclawski.util.EntityUtils;
 
 /**
- * extender of Base upload / save entity controller
+ * abstract Base upload / save entity controller
  * 
  * @author AWieclawski
  *
@@ -23,7 +23,7 @@ import edu.awieclawski.util.EntityUtils;
 @SuppressWarnings("serial")
 public abstract class BaseController extends HttpServlet {
 
-	private static Logger LOGGER; // = Logger.getLogger(BaseController.class.getName());
+	protected static Logger LOGGER = Logger.getLogger(BaseController.class.getName()); // to be overwritten in extender
 
 	// operate fields
 	protected EntitiesDao entityDao;
@@ -43,7 +43,7 @@ public abstract class BaseController extends HttpServlet {
 		entity = AllowedEntities.getAllowedEntityByName(initEntityName);
 		if (entity != null) {
 			entityMap = EntityUtils.getMapOfFieldsAndValuesFromClass(entity);
-			labelsMap = EntityUtils.getMapOfFieldsAndLabelsFromClass(entity);
+			labelsMap = entity.getLabelsOrder();
 			recordsMap = EntityUtils.getMapOfRecordFieldsFromClass(entity);
 		}
 	}

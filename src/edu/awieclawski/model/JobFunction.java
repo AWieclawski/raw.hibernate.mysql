@@ -1,6 +1,8 @@
 package edu.awieclawski.model;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -118,6 +120,20 @@ public class JobFunction extends BaseEntity implements Serializable, JobFunction
 	@Override
 	public String getEntityTypeMark() {
 		return entityTypeMark;
+	}
+
+	// Label order
+	@Override
+	public Map<String, String> getLabelsOrder() {
+		Map<String, String> map = new LinkedHashMap<>() {
+			private static final long serialVersionUID = -2358858973241099543L;
+			// order is important
+			{
+				put("jobName", jobNameLabel);
+				put("isSupervisor", isSupervisorLabel);
+			}
+		};
+		return map;
 	}
 
 }

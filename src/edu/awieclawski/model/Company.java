@@ -1,6 +1,8 @@
 package edu.awieclawski.model;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -139,6 +141,22 @@ public class Company extends BaseEntity implements Serializable, CompanyLables {
 	@Override
 	public String getAddressRecordLabel() {
 		return addressRecordLabel;
+	}
+
+	// Label order
+
+	@Override
+	public Map<String, String> getLabelsOrder() {
+		Map<String, String> map = new LinkedHashMap<>() {
+			private static final long serialVersionUID = -5458858973241099532L;
+			// order is important
+			{
+				put("taxId", taxIdLabel);
+				put("companyName", companyNameLabel);
+				put("addressRecord", addressRecordLabel);
+			}
+		};
+		return map;
 	}
 
 }

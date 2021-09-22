@@ -1,5 +1,7 @@
 package edu.awieclawski.base;
 
+import java.util.Map;
+
 /**
  * getters for transient fields to be inherited by entities
  * 
@@ -18,5 +20,10 @@ public abstract class BaseEntity {
 	public abstract String getEntityHeaderName();
 
 	public abstract String getEntityTypeMark();
+	
+	// to override by label interface
+	
+	public abstract Map<String, String> getLabelsOrder();
+	
 
 }

@@ -3,6 +3,8 @@ package edu.awieclawski.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -205,6 +207,26 @@ public class JobContract extends BaseEntity implements Serializable, JobContract
 	@Override
 	public String getJobFunctionRecordLabel() {
 		return jobFunctionRecordLabel;
+	}
+
+	// Label order
+	@Override
+	public Map<String, String> getLabelsOrder() {
+		Map<String, String> map = new LinkedHashMap<>() {
+			private static final long serialVersionUID = 1458858973241099321L;
+			// order is important
+			{
+				put("contractName", contractNameLabel);
+				put("contractStarts", contractStartsLabel);
+				put("contractEnds", contractEndsLabel);
+				put("salary", salaryLabel);
+				put("companyRecord", companyRecordLabel);
+				put("personRecord", personRecordLabel);
+				put("jobFunctionRecord", jobFunctionRecordLabel);
+			}
+		};
+		// not yet sorted
+		return map;
 	}
 
 }

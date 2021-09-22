@@ -2,6 +2,8 @@ package edu.awieclawski.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -166,6 +168,23 @@ public class Person extends BaseEntity implements Serializable, PersonLabels {
 	@Override
 	public String getEntityListPath() {
 		return entityListPath;
+	}
+
+	// Label order
+	@Override
+	public Map<String, String> getLabelsOrder() {
+		Map<String, String> map = new LinkedHashMap<>() {
+			private static final long serialVersionUID = 7318858973241099369L;
+			// order is important
+			{
+				put("govermentNo", govermentNoLabel);
+				put("firstName", firstNameLabel);
+				put("lastName", lastNameLabel);
+				put("birthDate", birthDateLabel);
+				put("addressRecord", addressRecordLabel);
+			}
+		};
+		return map;
 	}
 
 }

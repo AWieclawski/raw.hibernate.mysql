@@ -40,7 +40,7 @@ public class EntityUtilTests {
 		System.out.println("head=" + EntityUtils.getEntityHeaderByBaseEntity(obj, list));
 		Map<String, Object> labelsMap = EntityUtils.getMapOfFieldsAndValuesFromClass(obj);
 		System.out.println("valuesmap=" + labelsMap.toString());
-		System.out.println("labelsmap=" + EntityUtils.getMapOfFieldsAndLabelsFromClass(obj).toString());
+
 		System.out.println("entityFromMap=" + EntityUtils.getEntityFromMap(labelsMap, obj).toString());
 		System.out.println("mapOfRecordFieldsFromClass=" + EntityUtils.getMapOfRecordFieldsFromClass(obj).toString());
 
