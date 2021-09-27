@@ -9,6 +9,7 @@ import java.util.Map;
 import edu.awieclawski.model.Address;
 import edu.awieclawski.model.Company;
 import edu.awieclawski.model.JobContract;
+import edu.awieclawski.model.JobFunction;
 import edu.awieclawski.model.Person;
 
 /**
@@ -40,7 +41,7 @@ public class AllowedEntities {
 	 * @return
 	 */
 	public static List<BaseEntity> getEntitiesList() {
-		return (Arrays.asList(new Address(), new Person(), new Company(), new JobContract()));
+		return (Arrays.asList(new Address(), new Person(), new Company(), new JobContract(), new JobFunction()));
 	}
 
 	public static Class<? extends BaseEntity> getAllowedEntityClassByName(String entityName) {

@@ -170,7 +170,7 @@ public class Person extends BaseEntity implements Serializable, PersonLabels {
 		return entityListPath;
 	}
 
-	// Label order
+	// Labels order
 	@Override
 	public Map<String, String> getLabelsOrder() {
 		Map<String, String> map = new LinkedHashMap<>() {

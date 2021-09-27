@@ -214,7 +214,7 @@ public class Address extends BaseEntity implements Serializable, AddressLabels {
 		return entityListPath;
 	}
 
-	// Label order
+	// Labels order
 
 	@Override
 	public Map<String, String> getLabelsOrder() {

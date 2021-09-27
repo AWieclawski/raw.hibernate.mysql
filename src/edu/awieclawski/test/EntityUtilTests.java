@@ -43,6 +43,7 @@ public class EntityUtilTests {
 
 		System.out.println("entityFromMap=" + EntityUtils.getEntityFromMap(labelsMap, obj).toString());
 		System.out.println("mapOfRecordFieldsFromClass=" + EntityUtils.getMapOfRecordFieldsFromClass(obj).toString());
+		System.out.println("mapOfLabelsOrder=" + obj.getLabelsOrder());
 
 		System.out.println(" - obj class name=" + obj.getClass().getName());
 		System.out.println("entityClassesList=" + AllowedEntities.getEntityClassesList());

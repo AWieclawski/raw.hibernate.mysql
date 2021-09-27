@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.awieclawski.dao.EntitiesDao;
 import edu.awieclawski.util.EntityUtils;
+//import edu.awieclawski.base.LabelAttributes;
 
 /**
  * abstract Base upload / save entity controller
@@ -23,22 +24,29 @@ import edu.awieclawski.util.EntityUtils;
 @SuppressWarnings("serial")
 public abstract class BaseController extends HttpServlet {
 
-	protected static Logger LOGGER = Logger.getLogger(BaseController.class.getName()); // to be overwritten in extender
+	// to be overwritten in extender
+	protected static Logger LOGGER = Logger.getLogger(BaseController.class.getName());
 
-	// operate fields
+	// to be overwritten in extender
+	public abstract BaseEntity getinitEntity();
+
+	// operate fields - to be overwritten in extender
 	protected EntitiesDao entityDao;
 	protected Map<String, Object> entityMap;
 	protected Map<String, BaseEntity> recordsMap;
 	protected Map<String, String> labelsMap;
 
-	// controller individual entity initiator
+	// controller individual entity initiator - to be overwritten in extender
 	protected BaseEntity initEntity = getinitEntity();
 	protected String initEntityName = initEntity.getClass().getName();
 	protected BaseEntity entity;
 
-	public abstract BaseEntity getinitEntity();
-
-	public void getInit() throws Exception {
+	/**
+	 * do not override!
+	 * 
+	 * @throws Exception
+	 */
+	protected void getInit() throws Exception {
 		entityDao = new EntitiesDao();
 		entity = AllowedEntities.getAllowedEntityByName(initEntityName);
 		if (entity != null) {
@@ -48,15 +56,31 @@ public abstract class BaseController extends HttpServlet {
 		}
 	}
 
+	/**
+	 * do not override!
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	protected void setAttributes(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setAttribute("entityMap", labelsMap);
-		request.setAttribute("head", entity.getEntityHeaderName());
-		request.setAttribute("action", entity.getEntityUploadPath().replaceAll("/", ""));
+		request.setAttribute(LabelAttributes.ENT_MAP.getParName(), labelsMap);
+		request.setAttribute(LabelAttributes.HEAD.getParName(), entity.getEntityHeaderName());
+		request.setAttribute(LabelAttributes.ACT.getParName(), entity.getEntityUploadPath().replaceAll("/", ""));
 
 		request.getRequestDispatcher("upform.jsp").forward(request, response);
 	}
 
+	/**
+	 * do not override!
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	protected void registerEntity(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
@@ -73,12 +97,17 @@ public abstract class BaseController extends HttpServlet {
 		// req.getRequestDispatcher("/upaddress")
 		// .forward(request,response);
 
-		request.setAttribute("labelsMap", labelsMap);
-		request.setAttribute("valuesMap", entityMap);
-		request.setAttribute("head", entity.getEntityHeaderName());
+		request.setAttribute(LabelAttributes.LAB_MAP.getParName(), labelsMap);
+		request.setAttribute(LabelAttributes.VAL_MAP.getParName(), entityMap);
+		request.setAttribute(LabelAttributes.HEAD.getParName(), entity.getEntityHeaderName());
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("confirmview.jsp");
 		dispatcher.forward(request, response);
+	}
+
+	protected void getEntitiesStack(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+//TODO build & operate entities stack
 	}
 
 }

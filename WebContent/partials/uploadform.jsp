@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="edu.awieclawski.base.LabelAttributes"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
@@ -7,18 +8,18 @@
 <%
 	String ctx = request.getContextPath();
 
-	pageContext.setAttribute("inputtype", "text");
-
-	pageContext.setAttribute("inputvalue", "");
+	pageContext.setAttribute("hed", request.getAttribute(LabelAttributes.HEAD.getParName()));
+	pageContext.setAttribute("entMap", request.getAttribute(LabelAttributes.ENT_MAP.getParName()));
+	pageContext.setAttribute("act", request.getAttribute(LabelAttributes.ACT.getParName()));
 %>
 
-<h3>Input ${head} data</h3>
+<h3>Input ${hed} data</h3>
 
 <div>
 
-	<form class="form-horizontal" action="<%=ctx%>/${action}" method="post">
+	<form class="form-horizontal" action="<%=ctx%>/${act}" method="post">
 
-		<c:forEach var="entry" items="${entityMap}">
+		<c:forEach var="entry" items="${entMap}">
 
 
 			<div class="form-group">

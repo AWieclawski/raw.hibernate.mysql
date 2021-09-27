@@ -122,7 +122,7 @@ public class JobFunction extends BaseEntity implements Serializable, JobFunction
 		return entityTypeMark;
 	}
 
-	// Label order
+	// Labels order
 	@Override
 	public Map<String, String> getLabelsOrder() {
 		Map<String, String> map = new LinkedHashMap<>() {

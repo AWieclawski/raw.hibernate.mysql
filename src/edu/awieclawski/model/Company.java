@@ -143,7 +143,7 @@ public class Company extends BaseEntity implements Serializable, CompanyLables {
 		return addressRecordLabel;
 	}
 
-	// Label order
+	// Labels order
 
 	@Override
 	public Map<String, String> getLabelsOrder() {

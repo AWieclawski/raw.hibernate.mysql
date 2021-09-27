@@ -172,7 +172,7 @@ public class JobContract extends BaseEntity implements Serializable, JobContract
 		return entityTypeMark;
 	}
 
-	// Label getters
+	// Labels getters
 
 	@Override
 	public String getContractNameLabel() {

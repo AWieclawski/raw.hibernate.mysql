@@ -3,26 +3,18 @@ package edu.awieclawski.test;
 import java.util.Stack;
 
 import edu.awieclawski.base.BaseEntity;
+import edu.awieclawski.model.Address;
 import edu.awieclawski.model.JobContract;
+import edu.awieclawski.model.Person;
 import edu.awieclawski.util.StackUtils;
 
 public class StackUtilTests {
 
-	public static void main(String[] args) {
-
-		JobContract jobCtr = new JobContract();
-
-		System.out.println("stack from " + jobCtr.getEntityHeaderName() + "--");
-
-		Stack<BaseEntity> stack = StackUtils.getStackEntitiesToSave(jobCtr);
-
+	private static void printStack(BaseEntity entity) {
+		Stack<BaseEntity> stack = StackUtils.getStackEntitiesToSave(entity);
 		int count = 0;
-		for (BaseEntity obj : stack) {
-			System.out.println(count + ",obj=" + obj);
-			count++;
-		}
 
-		System.out.println("\n");
+		System.out.println("\n * Order of peeking from the Stack *");
 
 		count = 0;
 
@@ -31,7 +23,15 @@ public class StackUtilTests {
 			stack.pop();
 			count++;
 		}
-		System.out.println("The Stack is " + stack);
+		System.out.println("The Stack is empty? " + stack.isEmpty());
+
+	}
+
+	public static void main(String[] args) {
+
+		printStack(new JobContract());
+		printStack(new Person());
+		printStack(new Address());
 
 	}
 
