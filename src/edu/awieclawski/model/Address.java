@@ -1,6 +1,7 @@
 package edu.awieclawski.model;
 
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -145,9 +146,10 @@ public class Address extends BaseEntity implements Serializable, AddressLabels {
 
 	@Override
 	public String toString() {
-		return "Address [addressId=" + addressId + ", addressName=" + addressName + ", country=" + country + ", city="
-				+ city + ", postalCode=" + postalCode + ", streetName=" + streetName + ", streetNumber=" + streetNumber
-				+ ", flatNumber=" + flatNumber + "]";
+//		return "Address [addressId=" + addressId + ", addressName=" + addressName + ", country=" + country + ", city="
+//				+ city + ", postalCode=" + postalCode + ", streetName=" + streetName + ", streetNumber=" + streetNumber
+//				+ ", flatNumber=" + flatNumber + "]";
+		return "Address [crtnIndx=" + crtnIndx + "]";
 	}
 
 	// Label getters - order is important!
@@ -232,6 +234,14 @@ public class Address extends BaseEntity implements Serializable, AddressLabels {
 			}
 		};
 		return map;
+	}
+
+	// unique index of creation
+	private String crtnIndx = getEntityTypeMark() + separator + ZonedDateTime.now().toInstant().toEpochMilli();
+
+	@Override
+	public String getCrtnIndx() {
+		return crtnIndx;
 	}
 
 }

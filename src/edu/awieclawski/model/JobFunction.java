@@ -1,6 +1,7 @@
 package edu.awieclawski.model;
 
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -80,7 +81,8 @@ public class JobFunction extends BaseEntity implements Serializable, JobFunction
 
 	@Override
 	public String toString() {
-		return "JobFunction [jobId=" + jobId + ", jobName=" + jobName + ", isSupervisor=" + isSupervisor + "]";
+//		return "JobFunction [jobId=" + jobId + ", jobName=" + jobName + ", isSupervisor=" + isSupervisor + "]";
+		return "JobFunction [crtnIndx=" + crtnIndx + "]";
 	}
 
 	// Label getters
@@ -134,6 +136,14 @@ public class JobFunction extends BaseEntity implements Serializable, JobFunction
 			}
 		};
 		return map;
+	}
+
+	// unique index of creation
+	private String crtnIndx = getEntityTypeMark() + separator + ZonedDateTime.now().toInstant().toEpochMilli();
+
+	@Override
+	public String getCrtnIndx() {
+		return crtnIndx;
 	}
 
 }

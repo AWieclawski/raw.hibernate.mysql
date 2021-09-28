@@ -2,6 +2,7 @@ package edu.awieclawski.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -140,9 +141,10 @@ public class JobContract extends BaseEntity implements Serializable, JobContract
 
 	@Override
 	public String toString() {
-		return "JobContract [contractId=" + contractId + ", contractName=" + contractName + ", contractStarts="
-				+ contractStarts + ", contractEnds=" + contractEnds + ", salary=" + salary + ", company="
-				+ companyRecord + ", employee=" + personRecord + ", job=" + jobFunctionRecord + "]";
+//		return "JobContract [contractId=" + contractId + ", contractName=" + contractName + ", contractStarts="
+//				+ contractStarts + ", contractEnds=" + contractEnds + ", salary=" + salary + ", company="
+//				+ companyRecord + ", employee=" + personRecord + ", job=" + jobFunctionRecord + "]";
+		return "JobContract [crtnIndx=" + crtnIndx + "]";
 	}
 
 	// Marks
@@ -227,6 +229,14 @@ public class JobContract extends BaseEntity implements Serializable, JobContract
 		};
 		// not yet sorted
 		return map;
+	}
+
+	// unique index of creation
+	private String crtnIndx = getEntityTypeMark() + separator + ZonedDateTime.now().toInstant().toEpochMilli();
+
+	@Override
+	public String getCrtnIndx() {
+		return crtnIndx;
 	}
 
 }

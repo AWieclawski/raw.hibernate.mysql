@@ -6,17 +6,17 @@ import edu.awieclawski.base.BaseEntity;
 import edu.awieclawski.model.Address;
 import edu.awieclawski.model.JobContract;
 import edu.awieclawski.model.Person;
-import edu.awieclawski.util.StackUtils;
+import edu.awieclawski.service.PersistOrderService;
+import edu.awieclawski.service.Pair;
 
 public class StackUtilTests {
 
 	private static void printStack(BaseEntity entity) {
-		Stack<BaseEntity> stack = StackUtils.getStackEntitiesToSave(entity);
+		Stack<BaseEntity> stack = (new PersistOrderService()).getStackEntities(entity);
+
 		int count = 0;
 
 		System.out.println("\n * Order of peeking from the Stack *");
-
-		count = 0;
 
 		while (!stack.isEmpty()) {
 			System.out.println(count + ",stack.peek()=" + stack.peek());
@@ -27,11 +27,34 @@ public class StackUtilTests {
 
 	}
 
+	private static void printStackMap(BaseEntity entity) {
+		Stack<Pair> stackedEnts = (new PersistOrderService()).getPersistPairsStack(entity);
+		int count = 0;
+
+		System.out.println("\n * Order of peeking from the StackMap *");
+
+		System.out.println("map to string" + stackedEnts.toString());
+
+		while (!stackedEnts.isEmpty()) {
+			System.out.println(count + ",stack.peek()=" + stackedEnts.peek());
+			stackedEnts.pop();
+			count++;
+		}
+		System.out.println("The Stack is empty? " + stackedEnts.isEmpty());
+
+	}
+
 	public static void main(String[] args) {
 
 		printStack(new JobContract());
-		printStack(new Person());
-		printStack(new Address());
+
+//		printStack(new Person());
+//		printStack(new Address());
+
+//		printStackMap(new Person());
+//		printStackMap(new Address());
+
+		printStackMap(new JobContract());
 
 	}
 

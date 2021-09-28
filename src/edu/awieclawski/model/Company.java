@@ -1,6 +1,7 @@
 package edu.awieclawski.model;
 
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -95,8 +96,9 @@ public class Company extends BaseEntity implements Serializable, CompanyLables {
 
 	@Override
 	public String toString() {
-		return "Company [companyId=" + companyId + ", taxId=" + taxId + ", companyName=" + companyName + ", address="
-				+ addressRecord + "]";
+//		return "Company [companyId=" + companyId + ", taxId=" + taxId + ", companyName=" + companyName + ", address="
+//				+ addressRecord + "]";
+		return "Company [crtnIndx=" + crtnIndx + "]";
 	}
 
 	// marks
@@ -157,6 +159,14 @@ public class Company extends BaseEntity implements Serializable, CompanyLables {
 			}
 		};
 		return map;
+	}
+
+	// unique index of creation
+	private String crtnIndx = getEntityTypeMark() + separator + ZonedDateTime.now().toInstant().toEpochMilli();
+
+	@Override
+	public String getCrtnIndx() {
+		return crtnIndx;
 	}
 
 }

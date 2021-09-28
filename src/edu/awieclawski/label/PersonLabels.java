@@ -28,11 +28,11 @@ public interface PersonLabels {
 
 	// Person labels
 
-	public String govermentNoLabel = "Government id";
+	public String govermentNoLabel = "Government ID";
 
 	public String firstNameLabel = "Surname";
 
-	public String lastNameLabel = "Family Name";
+	public String lastNameLabel = "Family name";
 
 	public String birthDateLabel = "Birth date";
 

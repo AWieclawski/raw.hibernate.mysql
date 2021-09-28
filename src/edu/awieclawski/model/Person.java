@@ -1,6 +1,7 @@
 package edu.awieclawski.model;
 
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -112,8 +113,9 @@ public class Person extends BaseEntity implements Serializable, PersonLabels {
 
 	@Override
 	public String toString() {
-		return "Person [pers_id=" + personId + ", first_name=" + firstName + ", last_name=" + lastName
-				+ ", date_of_birth=" + birthDate + ", address=" + addressRecord + "]";
+//		return "Person [pers_id=" + personId + ", first_name=" + firstName + ", last_name=" + lastName
+//				+ ", date_of_birth=" + birthDate + ", address=" + addressRecord + "]";
+		return "Person [crtnIndx=" + crtnIndx + "]";
 	}
 
 	// Label getters - order is important!
@@ -185,6 +187,14 @@ public class Person extends BaseEntity implements Serializable, PersonLabels {
 			}
 		};
 		return map;
+	}
+
+	// unique index of creation
+	private String crtnIndx = getEntityTypeMark() + separator + ZonedDateTime.now().toInstant().toEpochMilli();
+
+	@Override
+	public String getCrtnIndx() {
+		return crtnIndx;
 	}
 
 }
