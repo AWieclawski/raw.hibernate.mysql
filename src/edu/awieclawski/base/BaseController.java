@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.awieclawski.dao.EntitiesDao;
 import edu.awieclawski.util.EntityUtils;
-//import edu.awieclawski.base.LabelAttributes;
+import edu.awieclawski.ref.LabelAttributes;
+import edu.awieclawski.ref.ReferenceJSP;
 
 /**
  * abstract Base upload / save entity controller
@@ -70,7 +71,7 @@ public abstract class BaseController extends HttpServlet {
 		request.setAttribute(LabelAttributes.HEAD.getParName(), entity.getEntityHeaderName());
 		request.setAttribute(LabelAttributes.ACT.getParName(), entity.getEntityUploadPath().replaceAll("/", ""));
 
-		request.getRequestDispatcher("upform.jsp").forward(request, response);
+		request.getRequestDispatcher(ReferenceJSP.UP_FRM.getPageName()).forward(request, response);
 	}
 
 	/**
@@ -101,7 +102,7 @@ public abstract class BaseController extends HttpServlet {
 		request.setAttribute(LabelAttributes.VAL_MAP.getParName(), entityMap);
 		request.setAttribute(LabelAttributes.HEAD.getParName(), entity.getEntityHeaderName());
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("confirmview.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(ReferenceJSP.CON_VW.getPageName());
 		dispatcher.forward(request, response);
 	}
 

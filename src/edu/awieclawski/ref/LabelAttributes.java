@@ -1,4 +1,4 @@
-package edu.awieclawski.base;
+package edu.awieclawski.ref;
 
 /**
  * Attribute name labels to avoid mistakes between JSPs % controllers
@@ -11,8 +11,8 @@ public enum LabelAttributes {
 	ENT_MAP("Map of enties", "entityMap"), HEAD("Entity header", "head"), ACT("Form action", "action"),
 	LAB_MAP("Map of labels", "labelsMap"), VAL_MAP("Map of values", "valuesMap");
 
-	String label;
-	String parName; // parameter name if any
+	private String label;
+	private String parName; // parameter name if any
 
 	private LabelAttributes(String label, String parName) {
 		this.label = label;
@@ -23,16 +23,8 @@ public enum LabelAttributes {
 		return label;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
 	public String getParName() {
 		return parName;
-	}
-
-	public void setParName(String parName) {
-		this.parName = parName;
 	}
 
 }
