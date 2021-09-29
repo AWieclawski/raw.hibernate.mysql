@@ -56,6 +56,8 @@ public class StackUtilTests {
 
 		printStackPairsStatic(new JobContract());
 
+		printStackPairsStatic(new JobContract());
+
 		printStackPairsStatic(new Person());
 
 		printStackPairsStatic(new Address());

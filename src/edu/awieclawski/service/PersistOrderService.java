@@ -15,11 +15,12 @@ import edu.awieclawski.util.EntityUtils;
  */
 public class PersistOrderService {
 
-	private static int marker = -1;
+	private static int marker = -1; // marker of initial run in recurrence
 
 	public static Stack<Pair> getPersistPairsStack(BaseEntity entity) {
 		BaseEntity currentParent = null;
 		BaseEntity previousParent = null;
+		marker = -1;
 		Stack<Pair> stack = buildPersistPairsStack(entity, currentParent, previousParent);
 		return stack;
 	}
