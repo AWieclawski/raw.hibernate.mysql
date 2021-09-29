@@ -8,67 +8,81 @@ import edu.awieclawski.base.BaseEntity;
 import edu.awieclawski.util.EntityUtils;
 
 /**
- * must be initialized to get appropriate persist order of entities
+ * build & get appropriate persist order of entities
  * 
  * @author AWieclawski
  *
  */
 public class PersistOrderService {
 
-	private BaseEntity masterParent = null;
-	private BaseEntity currentParent = null;
-	private BaseEntity previousParent = null;
-	private Stack<Pair> stackPairs = new Stack<>();
-	private Stack<BaseEntity> stackEntities = new Stack<>();
+	private static int marker = -1;
 
-	public Stack<Pair> getPersistPairsStack(BaseEntity entity) {
-		getPersistEntitiesStack(entity);
-		return stackPairs;
+	public static Stack<Pair> getPersistPairsStack(BaseEntity entity) {
+		BaseEntity currentParent = null;
+		BaseEntity previousParent = null;
+		Stack<Pair> stack = buildPersistPairsStack(entity, currentParent, previousParent);
+		return stack;
 	}
 
-	public Stack<BaseEntity> getStackEntities(BaseEntity entity) {
-		getPersistEntitiesStack(entity);
+	/**
+	 * Recurrent building the Stack of entities to save in appropriate order
+	 * 
+	 * @param entity
+	 * @return
+	 */
+	public static Stack<BaseEntity> getPersistEntitiesStack(BaseEntity entity) {
+		Stack<BaseEntity> stackEntities = new Stack<>();
+
+		if (entity != null)
+			stackEntities.push(entity);
+
+		Map<String, BaseEntity> entityMap = EntityUtils.getMapOfRecordFieldsFromClass((BaseEntity) entity);
+
+		for (Entry<String, BaseEntity> entry : entityMap.entrySet()) {
+
+			BaseEntity value = entry.getValue();
+
+			if (value != null)
+				stackEntities.push(value);
+
+			Map<String, BaseEntity> innerMap = EntityUtils.getMapOfRecordFieldsFromClass((BaseEntity) value);
+
+			if (innerMap.size() > 0) {
+				stackEntities.pop(); // remove just pushed 'value' - it will be pushed as 'entity'
+				stackEntities.addAll(getPersistEntitiesStack(value));
+			}
+		}
 		return stackEntities;
-	}
-
-	public BaseEntity getMasterParent() {
-		return masterParent;
 	}
 
 	/**
 	 * Recurrent building the Stack of entities pairs to save in appropriate order
 	 * 
-	 * tested for 2 levels of entity tree
-	 * 
 	 * @param entity
 	 * @return
 	 */
-	private void getPersistEntitiesStack(BaseEntity entity) {
-//		Stack<BaseEntity> stackEntities = new Stack<>();
+	private static Stack<Pair> buildPersistPairsStack(BaseEntity entity, BaseEntity currentParent,
+			BaseEntity previousParent) {
+		Stack<Pair> stackPairs = new Stack<>();
 
-		if (entity != null) {
-			if (stackPairs.size() == 0) {
+		if (entity != null)
+			if (marker < 0) {
 				stackPairs.push(new Pair(null, entity));
-				masterParent = entity;
 				previousParent = entity;
 			} else {
 				stackPairs.push(new Pair(currentParent, entity));
 			}
-			stackEntities.push(entity);
-		}
 
 		Map<String, BaseEntity> entityMap = EntityUtils.getMapOfRecordFieldsFromClass((BaseEntity) entity);
 
-		if (entityMap.size() > 0) {
+		if (entityMap.size() > 0)
 			currentParent = entity;
-		}
 
 		for (Entry<String, BaseEntity> entry : entityMap.entrySet()) {
 
 			BaseEntity value = entry.getValue();
 
 			if (value != null) {
-				stackEntities.push(value);
 				stackPairs.push(new Pair(currentParent, value));
 			}
 
@@ -77,13 +91,12 @@ public class PersistOrderService {
 			if (innerMap.size() > 0) {
 				previousParent = currentParent;
 				stackPairs.pop();
-				stackEntities.pop(); // remove just pushed 'value' - it will be pushed as 'entity'
-				getPersistEntitiesStack(value);
-			} else {
+				marker = stackPairs.size();
+				stackPairs.addAll(buildPersistPairsStack(value, currentParent, previousParent));
+			} else
 				currentParent = previousParent;
-			}
 		}
-
+		return stackPairs;
 	}
 
 }

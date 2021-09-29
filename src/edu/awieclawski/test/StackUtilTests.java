@@ -12,7 +12,7 @@ import edu.awieclawski.service.Pair;
 public class StackUtilTests {
 
 	private static void printStack(BaseEntity entity) {
-		Stack<BaseEntity> stack = (new PersistOrderService()).getStackEntities(entity);
+		Stack<BaseEntity> stack = PersistOrderService.getPersistEntitiesStack(entity);
 
 		int count = 0;
 
@@ -27,11 +27,11 @@ public class StackUtilTests {
 
 	}
 
-	private static void printStackMap(BaseEntity entity) {
-		Stack<Pair> stackedEnts = (new PersistOrderService()).getPersistPairsStack(entity);
+	private static void printStackPairsStatic(BaseEntity entity) {
+		Stack<Pair> stackedEnts = PersistOrderService.getPersistPairsStack(entity);
 		int count = 0;
 
-		System.out.println("\n * Order of peeking from the StackMap *");
+		System.out.println("\n * Order of peeking from the Stack Pairs - static method *");
 
 		System.out.println("map to string" + stackedEnts.toString());
 
@@ -46,7 +46,7 @@ public class StackUtilTests {
 
 	public static void main(String[] args) {
 
-		printStack(new JobContract());
+//		printStack(new JobContract());
 
 //		printStack(new Person());
 //		printStack(new Address());
@@ -54,7 +54,11 @@ public class StackUtilTests {
 //		printStackMap(new Person());
 //		printStackMap(new Address());
 
-		printStackMap(new JobContract());
+		printStackPairsStatic(new JobContract());
+
+		printStackPairsStatic(new Person());
+
+		printStackPairsStatic(new Address());
 
 	}
 

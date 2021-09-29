@@ -37,7 +37,6 @@ public class HibernateConfig {
 					LOGGER.log(Level.SEVERE, clazz + " error in HibernateConfig " + e.getMessage());
 					e.printStackTrace();
 				}
-
 		}
 		return configuration;
 	}
