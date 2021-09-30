@@ -6,13 +6,13 @@ import edu.awieclawski.base.BaseEntity;
 import edu.awieclawski.model.Address;
 import edu.awieclawski.model.JobContract;
 import edu.awieclawski.model.Person;
-import edu.awieclawski.service.PersistOrderService;
 import edu.awieclawski.service.Pair;
+import edu.awieclawski.util.PersistOrderUtils;
 
 public class StackUtilTests {
 
 	private static void printStack(BaseEntity entity) {
-		Stack<BaseEntity> stack = PersistOrderService.getPersistEntitiesStack(entity);
+		Stack<BaseEntity> stack = PersistOrderUtils.getPersistEntitiesStack(entity);
 
 		int count = 0;
 
@@ -28,7 +28,7 @@ public class StackUtilTests {
 	}
 
 	private static void printStackPairsStatic(BaseEntity entity) {
-		Stack<Pair> stackedEnts = PersistOrderService.getPersistPairsStack(entity);
+		Stack<Pair> stackedEnts = PersistOrderUtils.getPersistPairsStack(entity);
 		int count = 0;
 
 		System.out.println("\n * Order of peeking from the Stack Pairs - static method *");

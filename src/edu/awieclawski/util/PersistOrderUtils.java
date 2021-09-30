@@ -1,11 +1,11 @@
-package edu.awieclawski.service;
+package edu.awieclawski.util;
 
 import java.util.Map;
 import java.util.Stack;
 import java.util.Map.Entry;
 
 import edu.awieclawski.base.BaseEntity;
-import edu.awieclawski.util.EntityUtils;
+import edu.awieclawski.service.Pair;
 
 /**
  * build & get appropriate persist order of entities
@@ -13,15 +13,15 @@ import edu.awieclawski.util.EntityUtils;
  * @author AWieclawski
  *
  */
-public class PersistOrderService {
+public class PersistOrderUtils {
 
-	private static int marker = -1; // marker of initial run in recurrence
+	private static int marker = -1; // marker of FIRST initial run in recurrence loops
+	private static BaseEntity currentParent = null;
+	private static BaseEntity previousParent = null;
 
 	public static Stack<Pair> getPersistPairsStack(BaseEntity entity) {
-		BaseEntity currentParent = null;
-		BaseEntity previousParent = null;
-		marker = -1;
-		Stack<Pair> stack = buildPersistPairsStack(entity, currentParent, previousParent);
+		initialFieldsReset();
+		Stack<Pair> stack = buildPersistPairsStack(entity);
 		return stack;
 	}
 
@@ -62,17 +62,15 @@ public class PersistOrderService {
 	 * @param entity
 	 * @return
 	 */
-	private static Stack<Pair> buildPersistPairsStack(BaseEntity entity, BaseEntity currentParent,
-			BaseEntity previousParent) {
+	private static Stack<Pair> buildPersistPairsStack(BaseEntity entity) {
 		Stack<Pair> stackPairs = new Stack<>();
 
 		if (entity != null)
 			if (marker < 0) {
 				stackPairs.push(new Pair(null, entity));
 				previousParent = entity;
-			} else {
+			} else
 				stackPairs.push(new Pair(currentParent, entity));
-			}
 
 		Map<String, BaseEntity> entityMap = EntityUtils.getMapOfRecordFieldsFromClass((BaseEntity) entity);
 
@@ -83,21 +81,29 @@ public class PersistOrderService {
 
 			BaseEntity value = entry.getValue();
 
-			if (value != null) {
+			if (value != null)
 				stackPairs.push(new Pair(currentParent, value));
-			}
 
 			Map<String, BaseEntity> innerMap = EntityUtils.getMapOfRecordFieldsFromClass((BaseEntity) value);
 
 			if (innerMap.size() > 0) {
 				previousParent = currentParent;
 				stackPairs.pop();
-				marker = stackPairs.size();
-				stackPairs.addAll(buildPersistPairsStack(value, currentParent, previousParent));
+				marker = stackPairs.size(); // after first run should be > 0
+				stackPairs.addAll(buildPersistPairsStack(value));
 			} else
 				currentParent = previousParent;
 		}
 		return stackPairs;
+	}
+
+	/**
+	 * fields should be reset before each static method calling
+	 */
+	private static void initialFieldsReset() {
+		currentParent = null;
+		previousParent = null;
+		marker = -1;
 	}
 
 }
