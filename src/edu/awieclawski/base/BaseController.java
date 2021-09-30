@@ -2,6 +2,7 @@ package edu.awieclawski.base;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -10,11 +11,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import edu.awieclawski.dao.EntitiesDao;
 import edu.awieclawski.util.EntityUtils;
+import edu.awieclawski.util.PersistOrderUtils;
 import edu.awieclawski.ref.LabelAttributes;
 import edu.awieclawski.ref.ReferenceJSP;
+import edu.awieclawski.service.Pair;
 
 /**
  * abstract Base upload / save entity controller
@@ -36,6 +40,7 @@ public abstract class BaseController extends HttpServlet {
 	protected Map<String, Object> entityMap;
 	protected Map<String, BaseEntity> recordsMap;
 	protected Map<String, String> labelsMap;
+	protected Stack<Pair> prstStack;
 
 	// controller individual entity initiator - to be overwritten in extender
 	protected BaseEntity initEntity = getinitEntity();
@@ -70,6 +75,7 @@ public abstract class BaseController extends HttpServlet {
 		request.setAttribute(LabelAttributes.ENT_MAP.getParName(), labelsMap);
 		request.setAttribute(LabelAttributes.HEAD.getParName(), entity.getEntityHeaderName());
 		request.setAttribute(LabelAttributes.ACT.getParName(), entity.getEntityUploadPath().replaceAll("/", ""));
+		getEntitiesStack(request, response); // remove after tests
 
 		request.getRequestDispatcher(ReferenceJSP.UP_FRM.getPageName()).forward(request, response);
 	}
@@ -106,9 +112,23 @@ public abstract class BaseController extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	/**
+	 * called after submit entity to build persistent order of transaction
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	protected void getEntitiesStack(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//TODO build & operate entities stack
+		String persistOrderStackAttrName = LabelAttributes.PRST_ORD.getParName();
+		HttpSession session = request.getSession(false);
+		if (session.getAttribute(persistOrderStackAttrName) == null) {
+			prstStack = PersistOrderUtils.getPersistPairsStack(entity);
+			session.setAttribute(persistOrderStackAttrName, prstStack);
+		}
+		System.out.println("--prstStack=" + session.getAttribute(persistOrderStackAttrName));
 	}
 
 }

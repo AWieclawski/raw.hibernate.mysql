@@ -9,7 +9,8 @@ package edu.awieclawski.ref;
 public enum LabelAttributes {
 
 	ENT_MAP("Map of enties", "entityMap"), HEAD("Entity header", "head"), ACT("Form action", "action"),
-	LAB_MAP("Map of labels", "labelsMap"), VAL_MAP("Map of values", "valuesMap");
+	LAB_MAP("Map of labels", "labelsMap"), VAL_MAP("Map of values", "valuesMap"),
+	PRST_ORD("Stack of entity pairs", "prstStack");
 
 	private String label;
 	private String parName; // parameter name if any

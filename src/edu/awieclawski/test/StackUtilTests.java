@@ -16,7 +16,7 @@ public class StackUtilTests {
 
 		int count = 0;
 
-		System.out.println("\n * Order of peeking from the Stack *");
+//		System.out.println("\n * Order of peeking from the Stack *");
 
 		while (!stack.isEmpty()) {
 			System.out.println(count + ",stack.peek()=" + stack.peek());
@@ -24,16 +24,16 @@ public class StackUtilTests {
 			count++;
 		}
 		System.out.println("The Stack is empty? " + stack.isEmpty());
-
 	}
 
 	private static void printStackPairsStatic(BaseEntity entity) {
 		Stack<Pair> stackedEnts = PersistOrderUtils.getPersistPairsStack(entity);
+		
 		int count = 0;
 
 		System.out.println("\n * Order of peeking from the Stack Pairs - static method *");
 
-		System.out.println("map to string" + stackedEnts.toString());
+//		System.out.println("map to string" + stackedEnts.toString());
 
 		while (!stackedEnts.isEmpty()) {
 			System.out.println(count + ",stack.peek()=" + stackedEnts.peek());
@@ -41,7 +41,6 @@ public class StackUtilTests {
 			count++;
 		}
 		System.out.println("The Stack is empty? " + stackedEnts.isEmpty());
-
 	}
 
 	public static void main(String[] args) {
